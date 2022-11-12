@@ -2,12 +2,9 @@
 <html lang="en">
 
 <head>
-    <title>Bootstrap Example</title>
+    <title>Top Jobs</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -26,36 +23,37 @@
             padding: 30px;
         }
         body>div>form>button{
-            color:white !important;
-            background-color: black !important;
+            color:white;
+            background-color: black;
+        }
+        body>div>form>h2{
+            font-style: bold ;
+            size: 50px;
         }
 
         
     </style>
     <script>
         function checkData() {
-            var email = document.getElementById("email").value;
+            var username = document.getElementById("username").value;
             var password = document.getElementById("pwd").value;
 
-            if (email.includes("@") == true) {
-                if (password.length > 8) {
-                    ;
-                } else {
-                    document.getElementById("mess").innerHTML = "Password Khong Hop Le";
-                    
-                };
-            } else {
-                document.getElementById("mess").innerHTML = "Email Khong Hop Le";
+            if (username.value == "") {
+                document.getElementById("mess").innerHTML = "Vui Long Nhap Username";  
+            } else if(password.value == "") {
+                document.getElementById("mess").innerHTML = "Vui Long Nhap Password";
             }
-
+            else{
+                ;
+            }
         }
     </script>
 
     <div class="container">
         <form action="/main.php">
-            <h2>Login</h2>
+            <h1>Login</h1>
             <div class="form-group">
-                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                <input type="text" class="form-control" id="username" placeholder="Enter username" name="username">
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
