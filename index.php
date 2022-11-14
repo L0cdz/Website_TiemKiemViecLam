@@ -15,10 +15,6 @@
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
     </script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
 
         a:hover {
             background-color: #ccc;
@@ -26,6 +22,9 @@
         #text-head{
             font-size: 80px;
             font-family: Garamond, serif;
+        }
+        .card:hover{
+            background-color: black;
         }
 
     </style>
@@ -35,8 +34,8 @@
     <header>
         <p id="text-head">Top Jobs</p>
     </header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid" style="background-color: #E2DEF5; padding: 20px;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding: 0;">
+            <div class="container-fluid" style="background-color: #E2DEF5;padding: 20px;">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -60,69 +59,116 @@
         </div>
     </nav>
 
-    <div class="container-search" style="padding: 10px;background-color: #EEE4C1;">
-        <form class="form-inline my-2 my-lg-0">
+    <div class="container-search" style="padding: 20px;background-color: #EEE4C1;">
+        <form class="form-inline my-2 my-lg-0" style=" display: flex;">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>
-
+    <div style="background-color: #C1EBF9;padding-bottom:10px;">
     <div class="container">
-        <div class="row" style="width: 100%;background-color: #C1EBF9;">
+        <div class="row" style="width: 100%;">
             <div class="product col-lg-12 col-sm-12 col-12">
-                <div class="row" style="margin-top: 10px;">
-                    <div class="col-lg-3 col-sm-6 col-12" style="padding: 10px;">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-lg-3 col-sm-6 col-12" style="margin-top: 15px;">
                         <div class="card">
-                            <div class="card-body" style="width: 200px; height: 300px;">
+                            <div class="card-body">
+                                <img src="https://bom.so/oPIJ9W" style="width: 100%;">
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6 col-12" style="padding: 10px;">
+                    <div class="col-lg-3 col-sm-6 col-12" style="margin-top: 15px;">
                         <div class="card">
-                            <div class="card-body" style="width: 200px; height: 300px;">
+                            <div class="card-body">
+                                <img src="https://bom.so/oPIJ9W" style="width: 100%">
                             </div>
                         </div>
                     </div>
-                    <div class=" col-lg-3 col-sm-6 col-12" style="padding: 10px;">
+                    <div class=" col-lg-3 col-sm-6 col-12" style="margin-top: 15px;">
                         <div class="card">
-                            <div class="card-body" style="width: 200px; height: 300px;">
+                            <div class="card-body">
+                                <img src="https://bom.so/oPIJ9W" style="width: 100%">
                             </div>
                         </div>
                     </div>
-                    <div class=" col-lg-3 col-sm-6 col-12" style="padding: 10px;">
+                    <div class=" col-lg-3 col-sm-6 col-12" style="margin-top: 15px;">
                         <div class="card" >
-                            <div class="card-body" style="width: 200px; height: 300px;">
+                            <div class="card-body">
+                                <img src="https://bom.so/oPIJ9W" style="width: 100%;">
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6 col-12" style="padding: 10px;">
+                    <div class="col-lg-3 col-sm-6 col-12" style="margin-top: 15px;">
                         <div class="card">
-                            <div class="card-body" style="width: 200px; height: 300px;">
+                            <div class="card-body">
+                                <img src="https://bom.so/oPIJ9W" style="width: 100%;">
                             </div>
                         </div>
                     </div>
-                    <div class=" col-lg-3 col-sm-6 col-12" style="padding: 10px;">
+                    <div class=" col-lg-3 col-sm-6 col-12" style="margin-top: 15px;">
                         <div class="card">
-                            <div class="card-body" style="width: 200px; height: 300px;">
+                            <div class="card-body">
+                                <img src="https://bom.so/oPIJ9W" style="width: 100%">
                             </div>
                         </div>
                     </div>
-                    <div class=" col-lg-3 col-sm-6 col-12" style="padding: 10px;">
+                    <div class=" col-lg-3 col-sm-6 col-12" style="margin-top: 15px;">
                         <div class="card">
-                            <div class="card-body" style="width: 200px; height: 300px;">
+                            <div class="card-body">
+                                <img src="https://bom.so/oPIJ9W" style="width: 100%">
                             </div>
                         </div>
                     </div>
-                    <div class=" col-lg-3 col-sm-6 col-12" style="padding: 10px;">
+                    <div class=" col-lg-3 col-sm-6 col-12" style="margin-top: 15px;">
                         <div class="card">
-                            <div class="card-body" style="width: 200px; height: 300px;">
+                            <div class="card-body">
+                                <img src="https://bom.so/oPIJ9W" style="width: 100%">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 col-12" style="margin-top: 15px;">
+                        <div class="card">
+                            <div class="card-body">
+                                <img src="https://bom.so/oPIJ9W" style="width: 100%;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-lg-3 col-sm-6 col-12" style="margin-top: 15px;">
+                        <div class="card">
+                            <div class="card-body">
+                                <img src="https://bom.so/oPIJ9W" style="width: 100%">
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-lg-3 col-sm-6 col-12" style="margin-top: 15px;">
+                        <div class="card">
+                            <div class="card-body">
+                                <img src="https://bom.so/oPIJ9W" style="width: 100%">
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-lg-3 col-sm-6 col-12" style="margin-top: 15px;">
+                        <div class="card">
+                            <div class="card-body">
+                                <img src="https://bom.so/oPIJ9W" style="width: 100%">
                             </div>
                         </div>
                     </div>
                 </div>
+                <nav aria-label="Page navigation example" style="margin-top:15px;">
+                    <ul class="pagination" style="justify-content: flex-end;">
+                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>
+    </div>
+    
     <div class="footer">
         <p style="text-align: center; line-height: 200px; color: black;background-color: #E2DEF5;">Copyright @ Top Jobs 2022</p>
     </div>
