@@ -58,7 +58,7 @@
             </div>
             <br>
             <div class="form-group">
-                <input type="password" class="form-control" id="cpwd" placeholder="Comfirm Password" name="cpwd">
+                <input type="password" class="form-control" id="cpwd" placeholder="Comfirm Password" name="cpwd" required>
             </div>
             <br>
             <label>Please choice role:</label>
