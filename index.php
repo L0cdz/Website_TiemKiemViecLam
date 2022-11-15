@@ -24,7 +24,13 @@
             font-family: Garamond, serif;
         }
         .card:hover{
-            background-color: black;
+            background-color:#E2DEF5;
+        }
+        .page-link{
+            color: black;
+        }
+        .btn-view{
+            background-color: #EEE4C1;
         }
 
     </style>
@@ -70,88 +76,100 @@
         <div class="row" style="width: 100%;">
             <div class="product col-lg-12 col-sm-12 col-12">
                 <div class="row" style="margin-top: 20px;">
-                    <div class="col-lg-3 col-sm-6 col-12" style="margin-top: 15px;">
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-12" style="margin-top: 15px;">
                         <div class="card">
                             <div class="card-body">
                                 <img src="https://bom.so/oPIJ9W" style="width: 100%;">
                             </div>
+                            <button class="btn-view accordion-collapse"name="btn-view" type="submit">View</button>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6 col-12" style="margin-top: 15px;">
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-12" style="margin-top: 15px;">
                         <div class="card">
                             <div class="card-body">
                                 <img src="https://bom.so/oPIJ9W" style="width: 100%">
                             </div>
+                            <button class="btn-view accordion-collapse"name="btn-view" type="submit">View</button>
                         </div>
                     </div>
-                    <div class=" col-lg-3 col-sm-6 col-12" style="margin-top: 15px;">
+                    <div class=" col-lg-3 col-md-4 col-sm-6 col-12" style="margin-top: 15px;">
                         <div class="card">
                             <div class="card-body">
                                 <img src="https://bom.so/oPIJ9W" style="width: 100%">
                             </div>
+                            <button class="btn-view accordion-collapse"name="btn-view" type="submit">View</button>
                         </div>
                     </div>
-                    <div class=" col-lg-3 col-sm-6 col-12" style="margin-top: 15px;">
+                    <div class=" col-lg-3 col-md-4 col-sm-6 col-12" style="margin-top: 15px;">
                         <div class="card" >
                             <div class="card-body">
                                 <img src="https://bom.so/oPIJ9W" style="width: 100%;">
-                            </div>
+                            </div> 
+                            <button class="btn-view accordion-collapse"name="btn-view" type="submit">View</button>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6 col-12" style="margin-top: 15px;">
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-12" style="margin-top: 15px;">
                         <div class="card">
                             <div class="card-body">
                                 <img src="https://bom.so/oPIJ9W" style="width: 100%;">
                             </div>
+                            <button name="btn-view" type="submit">View</button>
                         </div>
                     </div>
-                    <div class=" col-lg-3 col-sm-6 col-12" style="margin-top: 15px;">
+                    <div class=" col-lg-3 col-md-4 col-sm-6 col-12" style="margin-top: 15px;">
                         <div class="card">
                             <div class="card-body">
                                 <img src="https://bom.so/oPIJ9W" style="width: 100%">
                             </div>
+                            <button class="btn-view accordion-collapse"name="btn-view" type="submit">View</button>
                         </div>
                     </div>
-                    <div class=" col-lg-3 col-sm-6 col-12" style="margin-top: 15px;">
+                    <div class=" col-lg-3 col-md-4 col-sm-6 col-12" style="margin-top: 15px;">
                         <div class="card">
                             <div class="card-body">
                                 <img src="https://bom.so/oPIJ9W" style="width: 100%">
                             </div>
+                            <button class="btn-view accordion-collapse"name="btn-view" type="submit">View</button>
                         </div>
                     </div>
-                    <div class=" col-lg-3 col-sm-6 col-12" style="margin-top: 15px;">
+                    <div class=" col-lg-3 col-md-4 col-sm-6 col-12" style="margin-top: 15px;">
                         <div class="card">
                             <div class="card-body">
                                 <img src="https://bom.so/oPIJ9W" style="width: 100%">
                             </div>
+                            <button name="btn-view" type="submit">View</button>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6 col-12" style="margin-top: 15px;">
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-12" style="margin-top: 15px;">
                         <div class="card">
                             <div class="card-body">
                                 <img src="https://bom.so/oPIJ9W" style="width: 100%;">
                             </div>
+                            <button class="btn-view accordion-collapse"name="btn-view" type="submit">View</button>
                         </div>
                     </div>
-                    <div class=" col-lg-3 col-sm-6 col-12" style="margin-top: 15px;">
+                    <div class=" col-lg-3 col-md-4 col-sm-6 col-12" style="margin-top: 15px;">
                         <div class="card">
                             <div class="card-body">
                                 <img src="https://bom.so/oPIJ9W" style="width: 100%">
                             </div>
+                            <button class="btn-view accordion-collapse"name="btn-view" type="submit">View</button>
                         </div>
                     </div>
-                    <div class=" col-lg-3 col-sm-6 col-12" style="margin-top: 15px;">
+                    <div class=" col-lg-3 col-md-4 col-sm-6 col-12" style="margin-top: 15px;">
                         <div class="card">
                             <div class="card-body">
                                 <img src="https://bom.so/oPIJ9W" style="width: 100%">
                             </div>
+                            <button class="btn-view accordion-collapse"name="btn-view" type="submit">View</button>
                         </div>
                     </div>
-                    <div class=" col-lg-3 col-sm-6 col-12" style="margin-top: 15px;">
+                    <div class=" col-lg-3 col-md-4 col-sm-6 col-12" style="margin-top: 15px;">
                         <div class="card">
                             <div class="card-body">
                                 <img src="https://bom.so/oPIJ9W" style="width: 100%">
                             </div>
+                            <button class="btn-view accordion-collapse"name="btn-view" type="submit">View</button>
                         </div>
                     </div>
                 </div>
