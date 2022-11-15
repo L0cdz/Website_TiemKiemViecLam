@@ -113,7 +113,7 @@
                             <div class="card-body">
                                 <img src="https://bom.so/oPIJ9W" style="width: 100%;">
                             </div>
-                            <button name="btn-view" type="submit">View</button>
+                            <button class="btn-view accordion-collapse" name="btn-view" type="submit">View</button>
                         </div>
                     </div>
                     <div class=" col-lg-3 col-md-4 col-sm-6 col-12" style="margin-top: 15px;">
@@ -137,7 +137,7 @@
                             <div class="card-body">
                                 <img src="https://bom.so/oPIJ9W" style="width: 100%">
                             </div>
-                            <button name="btn-view" type="submit">View</button>
+                            <button class="btn-view accordion-collapse" name="btn-view" type="submit">View</button>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-6 col-12" style="margin-top: 15px;">
