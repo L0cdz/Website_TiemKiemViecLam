@@ -1,3 +1,6 @@
+<?php
+    require("config.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +15,7 @@
 
     <div class="container">
         <p>Login</p>
-        <form>
+        <form method="POST">
             <div class="form-group">
                 <input type="text" class="form-control" id="username" placeholder="Username" name="username">
             </div>
@@ -21,12 +24,29 @@
                 <input type="password" class="form-control" id="pwd" placeholder="Password" name="pwd">
             </div>
             <br>
-            <button onclick="" type="submit" class="btn btn-default" name="signin">Login</button>
+            <button type="submit" class="btn btn-default" name="signin">Login</button>
             <br><br>
             <a href="regis.php" name="signup">New user? Create an account.</a>
         </form>
     </div>
 
 </body>
+
+<?php
+    if(isset($_POST['signin'])){
+        $query = "SELECT * FROM `admin` WHERE `username` = '$_POST[username]' AND `password` = '$_POST[pwd]'";
+        $result = mysqli_query($conn,$query);
+        if(mysqli_num_rows($result)){
+            session_start();
+            $_SESSION['LoginId'] = $_POST['id'];
+            header("location: index.php");
+        }
+        else{
+            $message = "Tên đăng nhập hoặc mật khẩu không đúng";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+
+        }
+    }
+?>
 
 </html>

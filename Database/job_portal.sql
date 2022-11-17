@@ -5,21 +5,21 @@ USE `job_portal`;
 DROP TABLE IF EXISTS `Admin`;
 CREATE TABLE `Admin`
 (
-  admin_id INT(10) NOT NULL,
+  id INT(10) NOT NULL,
   username VARCHAR(20) DEFAULT NULL,
   password VARCHAR(20) DEFAULT NULL,
   name VARCHAR(50) DEFAULT NULL
 );
 INSERT INTO `Admin` VALUES
-('1','Admin','123','Alter rubber'),
-('2','Admin','123','Donald Trump'),
-('3','Admin','123','Elon Musk'),
-('4','Admin','123','MySQL');
+('1','admin','123','Alter rubber'),
+('2','admin2','123','Donald Trump'),
+('3','admin3','123','Elon Musk'),
+('4','admin4','123','MySQL');
 
 DROP TABLE IF EXISTS `Company`;
 CREATE TABLE `Company`
 (
-  company_id INT(10) NOT NULL,
+  id INT(10) NOT NULL,
   username VARCHAR(20) DEFAULT NULL,
   password VARCHAR(20) DEFAULT NULL,
   company_name VARCHAR(50) DEFAULT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE `Company`
 );
 
 INSERT INTO `Company` VALUES
-(1111,'Company 1','company1','123','023124123','Company1@gmail.com',1),
+(1111,'Company 1','user','123','023124123','Company1@gmail.com',1),
 (2222,'Company 2','company2','123','033124123','Company2@gmail.com',2),
 (3333,'Company 3','company3','123','043124123','Company3@gmail.com',4),
 (4444,'Company 4','company4','123','052124123','Company4@gmail.com',3);
@@ -37,7 +37,7 @@ INSERT INTO `Company` VALUES
 DROP TABLE IF EXISTS `Client`;
 CREATE TABLE `Client`
 (
-  client_id INT NOT NULL,
+  id INT NOT NULL,
   username VARCHAR(20) DEFAULT NULL,
   password VARCHAR(20) DEFAULT NULL,
   full_name VARCHAR(50) DEFAULT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE `Client`
   admin_id INT(10) NOT NULL 
 );
 INSERT INTO `Client` VALUES
-(111,'cooker122','123','Employee 1','employee1@gmail.com','0123456789',NULL,4),
+(111,'user','123','Employee 1','employee1@gmail.com','0123456789',NULL,4),
 (112,'cooker129','123','Employee 2','employee2@gmail.com','0173456799',NULL,2),
 (113,'cooker131','123','Employee 3','employee3@gmail.com','0153456789',NULL,2),
 (114,'cooker140','123','Employee 4','employee4@gmail.com','0133456787',NULL,1);
@@ -95,26 +95,26 @@ INSERT INTO `Apply` VALUES
 (22,113,229,'2022-11-04');
 
 ALTER TABLE Admin
-ADD PRIMARY KEY (admin_id);
+ADD PRIMARY KEY (id);
 
 ALTER TABLE Company
-ADD PRIMARY KEY (company_id),
-ADD FOREIGN KEY (admin_id) REFERENCES Admin(admin_id);
+ADD PRIMARY KEY (id),
+ADD FOREIGN KEY (admin_id) REFERENCES Admin(id);
 
 ALTER TABLE Client
-ADD  PRIMARY KEY (client_id),
-ADD  FOREIGN KEY (admin_id) REFERENCES Admin(admin_id);
+ADD  PRIMARY KEY (id),
+ADD  FOREIGN KEY (admin_id) REFERENCES Admin(id);
 
 ALTER TABLE Job
 ADD PRIMARY KEY (job_id),
-ADD FOREIGN KEY (admin_id) REFERENCES Admin(admin_id);
+ADD FOREIGN KEY (admin_id) REFERENCES Admin(id);
 
 ALTER TABLE Post
 ADD PRIMARY KEY (post_id),
-ADD FOREIGN KEY (company_id) REFERENCES Company(company_id),
+ADD FOREIGN KEY (company_id) REFERENCES Company(id),
 ADD FOREIGN KEY (job_id) REFERENCES Job(job_id);
 
 ALTER TABLE Apply
 ADD  PRIMARY KEY (apply_id),
-ADD FOREIGN KEY (client_id) REFERENCES Client(client_id),
+ADD FOREIGN KEY (client_id) REFERENCES Client(id),
 ADD FOREIGN KEY (job_id) REFERENCES Job(job_id);
