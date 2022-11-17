@@ -3,49 +3,12 @@
 
 <head>
     <title>Top Jobs</title>
+    <link rel="stylesheet" href="css/register.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
-
-    <style>
-        form {
-            max-width: 400px;
-            margin: auto;
-        }
-        body{
-            background-color: #E2DEF5;
-        }
-        body>div>form{
-            background-color:#C1EBF9;
-            border:1px solid black;
-            padding: 30px;
-            text-align: center;
-            width: 300px;
-            height: 280px;
-        }
-        body>div>form>button{
-            color:white;
-            background-color: black;
-            padding: 5px;
-        }
-        body>div>p{
-            font-family: Garamond, serif;
-            font-size: 50px;
-            text-align: center;
-            display: block;
-            
-        }
-        .form-control{
-            padding: 5px;
-            width: 200px;
-            
-        }
-
-        
-    </style>
-
     <div class="container">
         <p>Register</p>
         <form>

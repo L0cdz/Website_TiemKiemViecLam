@@ -1,0 +1,20 @@
+a:hover {
+    background-color: #ccc;
+}
+
+#text-head {
+    font-size: 80px;
+    font-family: Garamond, serif;
+}
+
+.card:hover {
+    background-color: #E2DEF5;
+}
+
+.page-link {
+    color: black;
+}
+
+.btn-view {
+    background-color: #EEE4C1;
+}
