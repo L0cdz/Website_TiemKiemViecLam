@@ -25,14 +25,32 @@ CREATE TABLE `Company`
   company_name VARCHAR(50) DEFAULT NULL,
   phone_number VARCHAR(10) DEFAULT NULL,
   company_email VARCHAR(50) DEFAULT NULL,
+  role VARCHAR(10) DEFAULT NULL,
   admin_id INT(10) NOT NULL 
 );
 
 INSERT INTO `Company` VALUES
-(1111,'Company 1','user','123','023124123','Company1@gmail.com',1),
-(2222,'Company 2','company2','123','033124123','Company2@gmail.com',2),
-(3333,'Company 3','company3','123','043124123','Company3@gmail.com',4),
-(4444,'Company 4','company4','123','052124123','Company4@gmail.com',3);
+(1111,'Company 1','user','123','023124123','Company1@gmail.com','comp',1),
+(2222,'Company 2','company2','123','033124123','Company2@gmail.com','comp',2),
+(3333,'Company 3','company3','123','043124123','Company3@gmail.com','comp',4),
+(4444,'Company 4','company4','123','052124123','Company4@gmail.com','comp',3);
+
+DROP TABLE IF EXISTS `CV`;
+CREATE TABLE `CV`
+(
+  id INT(10) NOT NULL,
+  details VARCHAR(5000) DEFAULT NULL
+);
+INSERT INTO `CV` VALUES
+(1,'Contrary to popular belief, Lorem Ipsum is 
+not simply random text. It has roots in a piece 
+of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin
+professor at Hampden-Sydney College in Virginia'),
+(2,'Contrary to popular belief, Lorem Ipsum is not 
+simply random text. It has roots in a 
+piece of classical Latin literature from 45 BC,
+ making it over 2000 years old. Richard McClintock, 
+ a Latin');
 
 DROP TABLE IF EXISTS `Client`;
 CREATE TABLE `Client`
@@ -43,14 +61,15 @@ CREATE TABLE `Client`
   full_name VARCHAR(50) DEFAULT NULL,
   email VARCHAR(50) DEFAULT NULL,
   phone_number VARCHAR(10) DEFAULT NULL,
-  CV VARCHAR(500) DEFAULT NULL,
+  cv_id INT(10) NOT NULL,
+  role VARCHAR(10) DEFAULT NULL,
   admin_id INT(10) NOT NULL 
 );
 INSERT INTO `Client` VALUES
-(111,'user','123','Employee 1','employee1@gmail.com','0123456789',NULL,4),
-(112,'cooker129','123','Employee 2','employee2@gmail.com','0173456799',NULL,2),
-(113,'cooker131','123','Employee 3','employee3@gmail.com','0153456789',NULL,2),
-(114,'cooker140','123','Employee 4','employee4@gmail.com','0133456787',NULL,1);
+(111,'user','123','Employee 1','employee1@gmail.com','0123456789',1,'cli',4),
+(112,'cooker129','123','Employee 2','employee2@gmail.com','0173456799',2,'cli',2),
+(113,'cooker131','123','Employee 3','employee3@gmail.com','0153456789',2,'cli',2),
+(114,'cooker140','123','Employee 4','employee4@gmail.com','0133456787',1,'cli',1);
 
 DROP TABLE IF EXISTS `Job`;
 CREATE TABLE `Job`
@@ -73,7 +92,7 @@ CREATE TABLE `Post`
 (
   post_id INT(10) NOT NULL ,
   post_date date DEFAULT NULL,
-  company_id INT NOT NULL ,
+  company_id INT NOT NULL,
   job_id INT(10) NOT NULL
 );
 INSERT INTO `Post` VALUES
@@ -94,6 +113,7 @@ INSERT INTO `Apply` VALUES
 (11,111,224,'2022-11-04'),
 (22,113,229,'2022-11-04');
 
+
 ALTER TABLE Admin
 ADD PRIMARY KEY (id);
 
@@ -101,9 +121,13 @@ ALTER TABLE Company
 ADD PRIMARY KEY (id),
 ADD FOREIGN KEY (admin_id) REFERENCES Admin(id);
 
+ALTER TABLE CV
+ADD PRIMARY KEY (id);
+
 ALTER TABLE Client
-ADD  PRIMARY KEY (id),
-ADD  FOREIGN KEY (admin_id) REFERENCES Admin(id);
+ADD PRIMARY KEY (id),
+ADD FOREIGN KEY (admin_id) REFERENCES Admin(id),
+ADD FOREIGN KEY (cv_id) REFERENCES CV(id);
 
 ALTER TABLE Job
 ADD PRIMARY KEY (job_id),
@@ -115,6 +139,6 @@ ADD FOREIGN KEY (company_id) REFERENCES Company(id),
 ADD FOREIGN KEY (job_id) REFERENCES Job(job_id);
 
 ALTER TABLE Apply
-ADD  PRIMARY KEY (apply_id),
+ADD PRIMARY KEY (apply_id),
 ADD FOREIGN KEY (client_id) REFERENCES Client(id),
 ADD FOREIGN KEY (job_id) REFERENCES Job(job_id);
