@@ -17,7 +17,6 @@
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
     </script>
     
-     
 </head>
 
 <body>
@@ -33,17 +32,17 @@
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav ">
                         <li class="nav-item">
-                            <a class="nav-link" style="color: black;" href="#">Home</a>
+                            <a class="nav-link" style="color: black;" href="index.php">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: black;"href="#">For Company</a>
+                            <a class="nav-link" style="color: black;"href="Company/controllCompany.php">For Company</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: black;" href="#">For Employee</a>
+                            <a class="nav-link" style="color: black;" href="Client/controllClient.php">For Employee</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" 
-                            style="color: #FAF7F0; border:1px solid #393E46;background-color:#CD104D;" 
+                            style="color: #FAF7F0; border-radius:1px solid #393E46;background-color:#CD104D;" 
                             href="login.php">SIGN IN</a>
                         </li>
                     </ul>
