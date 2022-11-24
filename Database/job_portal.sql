@@ -2,38 +2,51 @@ DROP DATABASE IF EXISTS `job_portal`;
 CREATE DATABASE IF NOT EXISTS `job_portal`;
 USE `job_portal`;
 
+DROP TABLE IF EXISTS `Login`;
+CREATE TABLE `Login`
+(
+  log_id INT(10) NOT NULL,
+  username VARCHAR(20) NOT NULL,
+  password VARCHAR(20) NOT NULL,
+  account_type VARCHAR(10) NOT NULL
+);
+INSERT INTO `Login` VALUES
+(123,'admin','123','admin'),
+(213,'user','123','company'),
+(223,'user1','123','company'),
+(313,'user2','123','client'),
+(323,'user3','123','client'),
+(124,'admin2','123','admin'),
+(333,'user4','123','client');
+
 DROP TABLE IF EXISTS `Admin`;
 CREATE TABLE `Admin`
 (
   id INT(10) NOT NULL,
-  username VARCHAR(20) DEFAULT NULL,
-  password VARCHAR(20) DEFAULT NULL,
+  log_id INT(10) NOT NULL,
   name VARCHAR(50) DEFAULT NULL
 );
 INSERT INTO `Admin` VALUES
-('1','admin','123','Alter rubber'),
-('2','admin2','123','Donald Trump'),
-('3','admin3','123','Elon Musk'),
-('4','admin4','123','MySQL');
+('1',123,'Alter rubber'),
+('2',123,'Donald Trump'),
+('3',123,'Elon Musk'),
+('4',123,'MySQL');
 
 DROP TABLE IF EXISTS `Company`;
 CREATE TABLE `Company`
 (
   id INT(10) NOT NULL,
-  username VARCHAR(20) DEFAULT NULL,
-  password VARCHAR(20) DEFAULT NULL,
+  log_id INT(10) NOT NULL,
   company_name VARCHAR(50) DEFAULT NULL,
   phone_number VARCHAR(10) DEFAULT NULL,
-  company_email VARCHAR(50) DEFAULT NULL,
-  role VARCHAR(10) DEFAULT NULL,
-  admin_id INT(10) NOT NULL 
+  company_email VARCHAR(50) DEFAULT NULL
 );
 
 INSERT INTO `Company` VALUES
-(1111,'Company 1','user','123','023124123','Company1@gmail.com','comp',1),
-(2222,'Company 2','company2','123','033124123','Company2@gmail.com','comp',2),
-(3333,'Company 3','company3','123','043124123','Company3@gmail.com','comp',4),
-(4444,'Company 4','company4','123','052124123','Company4@gmail.com','comp',3);
+(1111,213,'Company 1','023124123','Company1@gmail.com'),
+(2222,223,'Company 2','033124123','Company2@gmail.com'),
+(3333,223,'Company 3','043124123','Company3@gmail.com'),
+(4444,213,'Company 4','052124123','Company4@gmail.com');
 
 DROP TABLE IF EXISTS `CV`;
 CREATE TABLE `CV`
@@ -55,42 +68,39 @@ piece of classical Latin literature from 45 BC,
 DROP TABLE IF EXISTS `Client`;
 CREATE TABLE `Client`
 (
-  id INT NOT NULL,
-  username VARCHAR(20) DEFAULT NULL,
-  password VARCHAR(20) DEFAULT NULL,
+  id INT(10) NOT NULL,
+  log_id INT(10) NOT NULL,
   full_name VARCHAR(50) DEFAULT NULL,
   email VARCHAR(50) DEFAULT NULL,
   phone_number VARCHAR(10) DEFAULT NULL,
-  cv_id INT(10) NOT NULL,
-  role VARCHAR(10) DEFAULT NULL,
-  admin_id INT(10) NOT NULL 
+  cv_id INT(10) NOT NULL
 );
 INSERT INTO `Client` VALUES
-(111,'user','123','Employee 1','employee1@gmail.com','0123456789',1,'cli',4),
-(112,'cooker129','123','Employee 2','employee2@gmail.com','0173456799',2,'cli',2),
-(113,'cooker131','123','Employee 3','employee3@gmail.com','0153456789',2,'cli',2),
-(114,'cooker140','123','Employee 4','employee4@gmail.com','0133456787',1,'cli',1);
+(111,323,'Employee 1','employee1@gmail.com','0123456789',1),
+(112,313,'Employee 2','employee2@gmail.com','0173456799',2),
+(113,333,'Employee 3','employee3@gmail.com','0153456789',2),
+(114,313,'Employee 4','employee4@gmail.com','0133456787',1);
 
 DROP TABLE IF EXISTS `Job`;
 CREATE TABLE `Job`
 (
   job_id INT(10) NOT NULL,
+  company_id INT(10) NOT NULL,
   salary VARCHAR(20) NOT NULL,
   description text,
   role VARCHAR(50) DEFAULT NULL,
   job_name VARCHAR(100) DEFAULT NULL,
-  skills_required VARCHAR(200) DEFAULT NULL,
-  admin_id INT(10) NOT NULL
+  skills_required VARCHAR(200) DEFAULT NULL
 );
 INSERT INTO `Job` VALUES
-(222,'$4000','This job is great','Admin','Back end dev','SQL',3),
-(224,'$7500','This job is great','Admin','Front end dev','HTMLL CSS JS',2),
-(229,'$9000','This job require high skills','Developer','Data Engineer at Google','Python Spark',4);
+(222,1111,'$4000','This job is great','Admin','Back end dev','SQL'),
+(224,3333,'$7500','This job is great','Admin','Front end dev','HTMLL CSS JS'),
+(229,4444,'$9000','This job require high skills','Developer','Data Engineer at Google','Apache Spark');
 
 DROP TABLE IF EXISTS `Post`;
 CREATE TABLE `Post`
 (
-  post_id INT(10) NOT NULL ,
+  post_id INT(10) NOT NULL,
   post_date date DEFAULT NULL,
   company_id INT NOT NULL,
   job_id INT(10) NOT NULL
@@ -105,33 +115,37 @@ DROP TABLE IF EXISTS `Apply`;
 CREATE TABLE `Apply`
 (
   apply_id INT(10) NOT NULL,
+  company_id INT(10) NOT NULL,
   client_id INT(10) NOT NULL,
   job_id INT(10) NOT NULL,
   apply_date Date DEFAULT NULL
 );
 INSERT INTO `Apply` VALUES
-(11,111,224,'2022-11-04'),
-(22,113,229,'2022-11-04');
+(11,1111,111,224,'2022-11-04'),
+(22,4444,113,229,'2022-11-04');
 
+ALTER TABLE Login
+ADD PRIMARY KEY (log_id);
 
 ALTER TABLE Admin
-ADD PRIMARY KEY (id);
+ADD PRIMARY KEY (id),
+ADD FOREIGN KEY (log_id) REFERENCES Login(log_id);
 
 ALTER TABLE Company
 ADD PRIMARY KEY (id),
-ADD FOREIGN KEY (admin_id) REFERENCES Admin(id);
+ADD FOREIGN KEY (log_id) REFERENCES Login(log_id);
 
 ALTER TABLE CV
 ADD PRIMARY KEY (id);
 
 ALTER TABLE Client
 ADD PRIMARY KEY (id),
-ADD FOREIGN KEY (admin_id) REFERENCES Admin(id),
+ADD FOREIGN KEY (log_id) REFERENCES Login(log_id),
 ADD FOREIGN KEY (cv_id) REFERENCES CV(id);
 
 ALTER TABLE Job
 ADD PRIMARY KEY (job_id),
-ADD FOREIGN KEY (admin_id) REFERENCES Admin(id);
+ADD FOREIGN KEY (company_id) REFERENCES Company(id);
 
 ALTER TABLE Post
 ADD PRIMARY KEY (post_id),
@@ -141,4 +155,6 @@ ADD FOREIGN KEY (job_id) REFERENCES Job(job_id);
 ALTER TABLE Apply
 ADD PRIMARY KEY (apply_id),
 ADD FOREIGN KEY (client_id) REFERENCES Client(id),
+ADD FOREIGN KEY (company_id) REFERENCES Company(id),
 ADD FOREIGN KEY (job_id) REFERENCES Job(job_id);
+
