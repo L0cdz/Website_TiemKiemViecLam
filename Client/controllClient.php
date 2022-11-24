@@ -49,7 +49,7 @@
                         <li class="nav-item">
                             <a class="nav-link" 
                             style="color: #FAF7F0; border-radius:1px solid #393E46;background-color:#CD104D;" 
-                            href="login.php">SIGN IN</a>
+                            href="../logout.php">SIGN OUT</a>
                         </li>
                     </ul>
                 </div>
