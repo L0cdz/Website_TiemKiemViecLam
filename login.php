@@ -34,12 +34,20 @@
 
 <?php
     if(isset($_POST['signin'])){
-        $query = "SELECT * FROM `admin` WHERE `username` = '$_POST[username]' AND `password` = '$_POST[pwd]'";
+        $query = "SELECT * FROM `login` WHERE `username` = '$_POST[username]' AND `password` = '$_POST[pwd]'";
         $result = mysqli_query($conn,$query);
         if(mysqli_num_rows($result)){
             session_start();
-            $_SESSION['LoginId'] = $_POST['id'];
-            header("location: index.php");
+            $row = $result -> fetch_array(MYSQLI_NUM);
+            if($row[3] == "admin" ){
+                header("location: Admin/controllAdmin.php");
+            }
+            elseif($row[3] == "client"){
+                header("location: Client/controllClient.php");
+            }
+            else{
+                header("location: Company/controllCompany.php");
+            }
         }
         else{
             $message = "Tên đăng nhập hoặc mật khẩu không đúng";
@@ -48,5 +56,6 @@
         }
     }
 ?>
+
 
 </html>
