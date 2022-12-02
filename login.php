@@ -12,7 +12,6 @@
 </head>
 
 <body>
-
     <div class="container">
         <p>Login</p>
         <form method="POST">
@@ -29,7 +28,6 @@
             <a href="regis.php" name="signup">New user? Create an account.</a>
         </form>
     </div>
-
 </body>
 
 <?php
@@ -47,6 +45,7 @@
             }
             else{
                 header("location: Company/controllCompany.php");
+
             }
         }
         else{
