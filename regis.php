@@ -65,8 +65,8 @@
         $username = mysqli_real_escape_string($conn, $_POST['username']);
         $password = mysqli_real_escape_string($conn, $_POST['pwd']); 
         $account_type = mysqli_real_escape_string($conn,  $_POST['role']);
-        
-        $query = "INSERT into `login` (`id`,`username`,`password`,`account_type`) VALUES ('$id','$username','$password','$account_type')";
+        $password_hash = password_hash($password,PASSWORD_BCRYPT);
+        $query = "INSERT into `login` (`id`,`username`,`password`,`account_type`) VALUES ('$id','$username','$hash_password','$account_type')";
         $result   = mysqli_query($conn, $query);
         if ($result) {
             echo "<div class='form'>

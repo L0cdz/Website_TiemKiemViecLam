@@ -7,17 +7,17 @@ CREATE TABLE `Login`
 (
   log_id INT(10) NOT NULL,
   username VARCHAR(20) NOT NULL,
-  password VARCHAR(20) NOT NULL,
+  password VARCHAR(100) NOT NULL,
   account_type VARCHAR(10) NOT NULL
 );
 INSERT INTO `Login` VALUES
-(123,'admin','123','admin'),
-(213,'user','123','company'),
-(223,'user1','123','company'),
-(313,'user2','123','client'),
-(323,'user3','123','client'),
-(124,'admin2','123','admin'),
-(333,'user4','123','client');
+(123,'admin','$2y$10$3noR.uZOta1FDS3D3fI39eiCYvN5YkxCfLbByInz7VcMFqJL4BE3.','admin'),
+(213,'user','$2y$10$3noR.uZOta1FDS3D3fI39eiCYvN5YkxCfLbByInz7VcMFqJL4BE3.','company'),
+(223,'user1','$2y$10$3noR.uZOta1FDS3D3fI39eiCYvN5YkxCfLbByInz7VcMFqJL4BE3.','company'),
+(313,'user2','$2y$10$3noR.uZOta1FDS3D3fI39eiCYvN5YkxCfLbByInz7VcMFqJL4BE3.','client'),
+(323,'user3','$2y$10$3noR.uZOta1FDS3D3fI39eiCYvN5YkxCfLbByInz7VcMFqJL4BE3.','client'),
+(124,'admin2','$2y$10$3noR.uZOta1FDS3D3fI39eiCYvN5YkxCfLbByInz7VcMFqJL4BE3.','admin'),
+(333,'user4','$2y$10$3noR.uZOta1FDS3D3fI39eiCYvN5YkxCfLbByInz7VcMFqJL4BE3.','client');
 
 DROP TABLE IF EXISTS `Admin`;
 CREATE TABLE `Admin`
@@ -125,7 +125,7 @@ INSERT INTO `Apply` VALUES
 (22,4444,113,229,'2022-11-04');
 
 ALTER TABLE Login
-ADD PRIMARY KEY (log_id);
+ADD PRIMARY KEY (log_id,username);
 
 ALTER TABLE Admin
 ADD PRIMARY KEY (id),
