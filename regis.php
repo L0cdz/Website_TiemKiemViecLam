@@ -61,12 +61,16 @@
     // When form submitted, insert values into the database.
     if (isset($_REQUEST['username'])) {
         // removes backslashes
-        $id = rand(1,100000);
+        // prevent duplicate id
+        $get_id = mysqli_query($conn,"SELECT log_id FROM `login`");
+        $get_array_id = mysqli_fetch_array($get_id);
+        while(in_array( ($id = mt_rand(1,10000)), $get_array_id));
+
         $username = mysqli_real_escape_string($conn, $_POST['username']);
         $password = mysqli_real_escape_string($conn, $_POST['pwd']); 
         $account_type = mysqli_real_escape_string($conn,  $_POST['role']);
         $password_hash = password_hash($password,PASSWORD_BCRYPT);
-        $query = "INSERT into `login` (`id`,`username`,`password`,`account_type`) VALUES ('$id','$username','$hash_password','$account_type')";
+        $query = "INSERT into `login` (`log_id`,`username`,`password`,`account_type`) VALUES ('$id','$username','$hash_password','$account_type')";
         $result   = mysqli_query($conn, $query);
         if ($result) {
             echo "<div class='form'>
