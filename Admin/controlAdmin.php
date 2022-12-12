@@ -21,7 +21,7 @@
 
 <body>
     <header>
-        <p id="text-head">Top Jobs</p>
+        <p id="text-head">Top Jobs - Admin</p>
     </header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding: 0;">
             <div class="container-fluid" style="background-color: #E2DEF5;padding: 20px;">
@@ -35,13 +35,10 @@
                             <a class="nav-link" style="color: black;" href="javascript:window.location.href=window.location.href">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: black;"href="#">Information</a>
+                            <a class="nav-link" style="color: black;" href="managementPost.php">ManagementPost</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: black;" href="#">ManagementPost</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" style="color: black;" href="#">ManagementAccount</a>
+                            <a class="nav-link" style="color: black;" href="managementAccount.php">ManagementAccount</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" 

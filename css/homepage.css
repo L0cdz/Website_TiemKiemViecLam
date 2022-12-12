@@ -18,3 +18,12 @@ a:hover {
 .btn-view {
     background-color: #EEE4C1;
 }
+.gutter{
+    --bs-gutter-x:0;
+}
+
+
+.bodySlideshow{
+    background-color: #C1EBF9 ;
+}
+

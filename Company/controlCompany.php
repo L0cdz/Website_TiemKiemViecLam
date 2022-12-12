@@ -21,7 +21,7 @@
 
 <body>
     <header>
-        <p id="text-head">Top Jobs</p>
+        <p id="text-head">Top Jobs - Company</p>
     </header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding: 0;">
             <div class="container-fluid" style="background-color: #E2DEF5;padding: 20px;">
@@ -32,16 +32,16 @@
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav ">
                         <li class="nav-item">
-                            <a class="nav-link" style="color: black;" href="javascript:window.location.href=window.location.href">Home</a>
+                            <a class="nav-link" style="color: black;" href="controlCompany.php">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: black;"href="#">Information</a>
+                            <a class="nav-link" style="color: black;"href="informationCompany.php">Information</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: black;" href="#">Post</a>
+                            <a class="nav-link" style="color: black;" href="postJob.php">Post</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: black;" href="#">ManagementApply</a>
+                            <a class="nav-link" style="color: black;" href="managementApply.php">ManagementApply</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" 

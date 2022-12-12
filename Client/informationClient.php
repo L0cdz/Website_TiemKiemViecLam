@@ -21,7 +21,7 @@
 
 <body>
     <header>
-        <p id="text-head">Top Jobs - Company</p>
+        <p id="text-head">Top Jobs - Employee</p>
     </header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding: 0;">
             <div class="container-fluid" style="background-color: #E2DEF5;padding: 20px;">
@@ -32,30 +32,71 @@
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav ">
                             <li class="nav-item">
-                                <a class="nav-link" style="color: black;" href="controlCompany.php">Home</a>
+                                <a class="nav-link" style="color: black;"  href="controlClient.php">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" style="color: black;"href="informationCompany.php">Information</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" style="color: black;" href="postJob.php">Post</a>
+                                <a class="nav-link" style="color: black;" href="informationClient.php">Information</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" style="color: black;" href="managementApply.php">ManagementApply</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" style="color: black;" href="managementCV.php">ManagementCV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" style="color: black;" href="bookmarkJob.php">Bookmark</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" 
                                 style="color: #FAF7F0; border-radius:1px solid #393E46;background-color:#CD104D;" 
                                 href="../logout.php">SIGN OUT</a>
                             </li>
-                    </ul>
+                        </ul>
                 </div>
         </div>
     </nav>
 
     <div style="background-color: #C1EBF9;padding-bottom:10px;height:1080px;">
         <div class="container">
-            <h1>Chưa biết</h1>
+            <h1>Quản Lý Thông Tin</h1>
+
+            <table class="table table-striped" style="margin-top: 10px;" id="tbdata">
+            
+                    <tr>
+                        <td>
+                            <label for="">Username</label> <input>
+                        </td>
+                    
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                            <label for="">Password</label> <input>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label for="">Full Name</label> <input>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label for="">SDT</label> <input>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label for="">Email</label> <input>
+                        </td>
+                    </tr>
+
+                    
+            </table>
+            <span class="btn btn-primary">Sửa</span>
+        </div>
     </div>
     
     <div class="footer">
