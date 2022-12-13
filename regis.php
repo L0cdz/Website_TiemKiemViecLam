@@ -62,6 +62,7 @@
         $num = mysqli_num_rows($result);
         if($num > 0){
             $exists = "Tên đăng nhập đã được sử dụng, vui lòng chọn tên khác.";
+            
         }
 
         else if($num == 0) { //no duplicate username
@@ -86,13 +87,13 @@
       
         if($showAlert) {
             echo "<div class='form'>
-            <h3>You are registered successfully.</h3><br/>
+            <h3 style='text-align: center;'>You are registered successfully.</h3><br/>
             <p class='link'>Click here to <a href='login.php'>Login</a></p>
             </div>";
         }
         else{
             echo "<div class='form'>
-            <h3>Required fields are missing</h3><br/>
+            <h3 style='text-align: center;'>Required fields are missing</h3><br/>
             </div>";
         }
         

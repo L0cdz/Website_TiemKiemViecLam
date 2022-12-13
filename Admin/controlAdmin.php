@@ -56,8 +56,25 @@
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>
-    <div style="background-color: #C1EBF9;padding-bottom:10px;height:1080px;">
+    <div style="background-color: white;padding-bottom:10px;height:1080px;">
         <div class="container">
+        <?php
+                include('../config.php'); //db connection
+                $sql = "SELECT * FROM `job`";
+                $result = $conn->query($sql);
+                if($result->num_rows>0){
+                    while($row = $result->fetch_assoc()){
+                        echo "Tên Công Việc:".$row["job_name"]."<br>";
+                        echo "Mô tả:".$row["description"]."<br>";
+                        echo "Lương:".$row["salary"]."<br>";
+                        echo "Kỹ Năng:".$row["skills_required"]."<br>";
+                        echo "<hr>";
+                    }
+                }else{
+                    echo "None result";
+                }
+                $conn->close();
+            ?>  
         </div>
     </div>
     

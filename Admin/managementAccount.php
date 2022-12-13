@@ -65,6 +65,37 @@
                 </thead>
                 <tbody></tbody>
             </table>
+            <?php
+                include('../config.php'); //db connection
+                $sql = "SELECT * FROM `login`";
+                $result = $conn->query($sql);
+                if($result->num_rows>0){
+                    while($row = $result->fetch_assoc()){
+                        $password_hash = $row['password'];
+                        echo "<tr>";
+                            echo "<th>";
+                            echo $row['username'];
+                            echo "</th>";
+                            echo $password_hash;
+                            echo "</th>";
+                            echo "<th>";
+                            echo $row["account_type"];
+                            echo "</th>";
+                            echo "<th><button name='btnapply'>Xóa</button></th>";
+                            echo "<th><button name='btnlove'>Sửa</button></th>";
+                            echo "<hr>";
+                        echo "</tr>";
+                        if (isset($_POST['btnapply'])) {
+                            echo ' <div class="alert alert-danger 
+                            alert-dismissible fade show" role="alert"> 
+                        <strong>Error!</strong> ';
+                        }
+                    }
+                }else{
+                    echo "None result";
+                }
+                $conn->close();
+            ?>  
         </div>
     </div>
     

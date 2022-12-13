@@ -59,8 +59,58 @@
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>
-    <div style="background-color: #C1EBF9;padding-bottom:10px;height:1080px;">
+
+    <div class="bodySlideshow">
+            <div id="carouselExampleIndicators" class="carousel slide col-12 p-0 mt-3 m-lg-0" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+
+                <div class="carousel-inner" >
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src=".././Images/slideshow1.png" alt="First slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src=".././Images/slideshow2.png" alt="Second slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src=".././Images/slideshow3.png" alt="Third slide">
+                    </div>
+                </div>
+
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev" style="margin-right: 1000px;">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </a>
+            </div>
+    </div>
+
+    <div style="background-color: white;padding-bottom:10px;height:1080px;">
         <div class="container">
+        <div class="container">
+            <?php
+                include('../config.php'); //db connection
+                $sql = "SELECT * FROM `job`";
+                $result = $conn->query($sql);
+                if($result->num_rows>0){
+                    while($row = $result->fetch_assoc()){
+        
+                        echo "Tên Công Việc:".$row["job_name"]."<br>";
+                        echo "Mô tả:".$row["description"]."<br>";
+                        echo "Lương:".$row["salary"]."<br>";
+                        echo "Kỹ Năng:".$row["skills_required"]."<br>";                   
+                        echo "<hr>";
+                    }
+                }else{
+                    echo "None result";
+                }
+                $conn->close();
+            ?>  
+        </div>
         </div>
     </div>
     

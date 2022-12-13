@@ -41,6 +41,7 @@
         if(mysqli_num_rows($table) > 0){
             $row = mysqli_fetch_array($table);
             $password_hash = $row['password'];
+            
             if (password_verify($password,$password_hash)){
                 session_start();
                 if($row['account_type'] == "admin" ){
