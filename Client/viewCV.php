@@ -30,7 +30,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                ul class="navbar-nav ">
+                    <ul class="navbar-nav ">
                         <li class="nav-item">
                             <a class="nav-link" style="color: black;"  href="controlClient.php">Home</a>
                         </li>
@@ -44,7 +44,7 @@
                             <a class="nav-link" style="color: black;" href="managementCV.php">ManagementCV</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: black;" href="bookmarkJob.php">Bookmark</a>
+                            <a class="nav-link" style="color: black;" href="loveJob.php">LoveJop</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" 
@@ -56,45 +56,44 @@
         </div>
     </nav>
 
-    <div style="background-color: #C1EBF9;padding-bottom:10px;height:1080px;">
+    <div style="background-color: white;padding-bottom:10px;">
         <div class="container">
-            <h1>Quản Lý Thông Tin</h1>
-
-            <table class="table table-striped" style="margin-top: 10px;" id="tbdata">
-            
-                    <tr>
-                        <td>
-                            <label for="">Job-Name</label><input>
-                        </td>
-                    
-                    </tr>
-                    
-                    <tr>
-                        <td>
-                            <label for="">Description</label><input>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label for="">Salary</label><input>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label for="">Skill</label><input>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label for="">Contact</label> <input>
-                        </td>
-                    </tr>
-
-                    
-            </table>
-            <span class="btn btn-primary">Apply</span>
+        <?php
+            function loadJob(){
+                    include('../config.php'); //db connection
+                    $sql = "SELECT * FROM `cv`";
+                    $result = $conn->query($sql);
+                    if($result->num_rows>0){
+                        while($row = $result->fetch_assoc()){
+                            echo"<div class='card-job' style='border: 1px solid black;display: flex;padding:20px;margin-top:20px;flex-wrap:wrap;'>";
+                                echo"<div style='margin-right:auto;margin-left:20px'>";
+                                    echo "<p style='font-size: 25px; color: red;'>".$row["name"]."</p>";
+                                    echo "<p>Tên :".$row["infor"]."</p>";
+                                    echo "<p>Học vấn :".$row["education"]."</p>";
+                                    echo "<p>Kinh nghiệm :".$row["exp"]."</p>";
+                                    echo "<p>Kỹ năng :".$row["skill"]."</p>";
+                                    echo "<p>Chứng chỉ :".$row["certificate"]."</p>";
+                                    echo "<p>Liên hệ :".$row["contact"]."</p>";
+                                    
+                                echo"</div>";
+                                echo"<form method='post'style='align-self: center;'>";
+                                    echo"<input  style='width:100px;height:50px;' type='submit' value='Sửa' name='btnEdit'></input>";
+                                    echo"<input  style='width:100px;height:50px;' type='submit' value='Xóa' name='btnDele'></input>";
+                                echo"</form>";
+                            echo"</div>";
+                            echo "<style>";
+                            echo ".card-job:hover{
+                                    background-color: #d9ffff;
+                                }";
+                            echo "</style>";
+                        }
+                    }else{
+                        echo "None result";
+                    }
+                    $conn->close();
+                }
+                loadJob();
+            ?> 
         </div>
     </div>
     

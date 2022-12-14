@@ -85,7 +85,7 @@
                 $showError = "Passwords do not match"; 
             }      
         }
-      
+    
         if($showAlert) {
             echo "<div class='form'>
             <h3 style='text-align: center;'>You are registered successfully.</h3><br/>

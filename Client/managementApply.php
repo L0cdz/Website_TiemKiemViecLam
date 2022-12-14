@@ -44,7 +44,7 @@
                                 <a class="nav-link" style="color: black;" href="managementCV.php">ManagementCV</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" style="color: black;" href="bookmarkJob.php">Bookmark</a>
+                                <a class="nav-link" style="color: black;" href="loveJob.php">LoveJop</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" 

@@ -56,25 +56,104 @@
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>
-    <div style="background-color: white;padding-bottom:10px;height:1080px;">
+    <div style='display: flex;padding:20px;margin-top:20px;flex-wrap:wrap;margin-left:180px'>
+        <div class="w3-content w3-section" style="max-width:1300px">
+            <img class="mySlides" src="https://baraqahmutaqqin.com.my/wp-content/uploads/2017/12/banner-02-1300x300.png" style="width:100%">
+            <img class="mySlides" src="https://www.rmit.edu.vn/content/dam/rmit/vn/en/assets-for-production/images/events/sbm/hr-forum-2020/hr-forum-2020-event-banner-1300x300.jpg" style="width:100%">
+            <img class="mySlides" src="https://baraqahmutaqqin.com.my/wp-content/uploads/2017/12/banner-03-1300x300.png" style="width:100%">
+        </div>
+    </div>
+    <script>
+        var myIndex = 0;
+        carousel();
+
+        function carousel() {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";  
+        }
+        myIndex++;
+        if (myIndex > x.length) {myIndex = 1}    
+        x[myIndex-1].style.display = "block";  
+        setTimeout(carousel, 2000); // Change image every 2 seconds
+        }
+    </script>
+
+    <div style="background-color: white;padding-bottom:10px;">
         <div class="container">
-        <?php
-                include('../config.php'); //db connection
-                $sql = "SELECT * FROM `job`";
-                $result = $conn->query($sql);
-                if($result->num_rows>0){
-                    while($row = $result->fetch_assoc()){
-                        echo "Tên Công Việc: ".$row["job_name"]."<br>";
-                        echo "Mô tả: ".$row["description"]."<br>";
-                        echo "Lương: ".$row["salary"]."<br>";
-                        echo "Kỹ Năng: ".$row["skills_required"]."<br>";
-                        echo "<hr>";
+            <p style='font-size: 40px;'>Công Ty Nổi Bật</p>
+            <?php
+                function loadCompany(){
+                    include('../config.php'); //db connection
+                    $sql = "SELECT * FROM `company`";
+                    $result = $conn->query($sql);
+                    $limit = 0;
+                    if($result->num_rows>0){
+                        echo"<div style='display:flex; justify-content: space-between; flex-wrap:wrap;'>";
+                        while($row = $result->fetch_assoc()){
+                            if($limit<10){
+                                echo"<div class='card-com' style='border: 1px solid black;display: inline-block;padding:20px;flex-wrap:wrap;margin-top:20px;'>";
+                                    echo "<div>";
+                                        echo "<image src='https://cdn4.iconfinder.com/data/icons/social-media-logos-6/512/71-github-256.png' style='width:200px;height:100px;'></image>";
+                                    echo"</div>";
+                                    echo"<div>";
+                                        echo "<p style='font-size: 25px; color: red;'>".$row["company_name"]."</p>";           
+                                    echo"</div>";
+                                echo"</div>";
+                                echo "<style>";
+                                    echo ".card-com:hover{
+                                        background-color: #d9ffff;
+                                    }";
+                                echo "</style>";
+                            }
+                            $limit += 1;
+                            
+                        }
+                        echo"</div>";
+                    }else{
+                        echo "None result";
                     }
-                }else{
-                    echo "None result";
+                    $conn->close();
                 }
-                $conn->close();
-            ?>  
+                loadCompany();
+            ?> 
+            <p style='font-size: 40px;'>Việc Làm IT Chất</p>
+            <?php
+            function loadJob(){
+                    include('../config.php'); //db connection
+                    $sql = "SELECT * FROM `job`";
+                    $result = $conn->query($sql);
+                    if($result->num_rows>0){
+                        while($row = $result->fetch_assoc()){
+                            
+                            echo"<div class='card-job' style='border: 1px solid black;display: flex;padding:20px;margin-top:20px;flex-wrap:wrap;'>";
+                                echo "<div>";
+                                    echo "<image src='https://cdn4.iconfinder.com/data/icons/social-media-logos-6/512/71-github-256.png' style='width:200px;height:100px;'></image>";
+                                echo"</div>";
+                                echo"<div style='margin-right:auto;margin-left:20px'>";
+                                    echo "<p style='font-size: 25px; color: red;'>".$row["job_name"]."</p>";
+                                    echo "<p>".$row["skills_required"]."</p>";
+                                    echo "<p>".$row["address"]."</p>";
+                                    echo "<p>".$row["salary"]."</p>";
+                                echo"</div>";
+                                echo"<div style='align-self: center;'>";
+                                    echo"<input  style='width:100px;height:50px;' type='submit' value='View' name='btnView'></input>";
+                                echo"</div>";
+                            echo"</div>";
+                            echo "<style>";
+                            echo ".card-job:hover{
+                                    background-color: #d9ffff;
+                                }";
+                            echo "</style>";
+                        }
+                    }else{
+                        echo "None result";
+                    }
+                    $conn->close();
+                }
+                loadJob();
+            ?> 
         </div>
     </div>
     

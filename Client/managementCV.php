@@ -44,7 +44,7 @@
                                 <a class="nav-link" style="color: black;" href="managementCV.php">ManagementCV</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" style="color: black;" href="bookmarkJob.php">Bookmark</a>
+                                <a class="nav-link" style="color: black;" href="loveJob.php">LoveJop</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" 
@@ -56,9 +56,49 @@
         </div>
     </nav>
 
-    <div style="background-color: #C1EBF9;padding-bottom:10px;height:1080px;">
+    <div style="background-color: white;padding-bottom:10px;height:1080px;">
         <div class="container">
-            <h1>Chưa biết</h1>
+            <form method='post'style='align-self: center;margin-top:20px;'>
+                <input  style='width:100px;height:50px;' type='submit' value='Thêm' name='btnAdd'></input>
+            </form>
+            <?php
+                function loadCV(){
+                    include('../config.php'); //db connection
+                    $sql = "SELECT * FROM `cv`";
+                    $result = $conn->query($sql);
+                    if($result->num_rows>0){
+                        while($row = $result->fetch_assoc()){ 
+                            echo"<div class='card-job' style='border: 1px solid black;display: flex;padding:20px;margin-top:20px;flex-wrap:wrap;'>";
+                                echo"<div style='margin-right:auto;margin-left:20px'>";
+                                    echo "<p style='font-size: 25px; color: red;'>".$row["name"]."</p>";
+                                    //echo "<p>".$row["details"]."</p>";
+                                echo"</div>";
+                                echo"<form method='post'style='align-self: center;'>";
+                                    echo"<input  style='width:100px;height:50px;' type='submit' value='Sửa' name='btnEdit'></input>";
+                                    echo"<input  style='width:100px;height:50px;' type='submit' value='Xóa' name='btnDele'></input>";
+                                    echo"<input  style='width:100px;height:50px;' type='submit' value='Xem' name='btnView'></input>";
+                                echo"</form>";
+                            echo"</div>";
+                            echo "<style>";
+                            echo ".card-job:hover{
+                                    background-color: #d9ffff;
+                                }";
+                            echo "</style>";
+                        }
+                    }else{
+                        echo "None result";
+                    }
+                    $conn->close();
+                }
+                loadCV();
+                if(isset($_POST["btnView"])){
+                    ?>
+                        <script type='text/javascript'>
+                            window.open('viewCV.php')
+                        </script>"
+                    <?php
+                }
+            ?>
             
         </div>
     </div>
