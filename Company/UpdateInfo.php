@@ -1,20 +1,3 @@
-<?php
-include_once('../config.php');
-session_start();
-$id = $_SESSION['id'];
-if(isset($_SESSION['id']))
-{
-    $query = "select *
-    from `company` join `login` on company.log_id=login.log_id WHERE company.id = $id";
-    $result = mysqli_query($conn, $query);
-}
-else
-{
-    header('location:../login.php');
-}
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,43 +55,39 @@ else
 
     <div style="background-color: #C1EBF9;padding-bottom:10px;height:1080px;">
         <div class="container">
-            <h1>Company's information</h1>
+            <h1>Update Company's information</h1>
 
             <table class="table table-striped" style="margin-top: 10px;" id="tbdata">
 
                     <tr>
                         <td>
-                            <label for="">Company name </label>
+                            <label for="">Company name </label> <input>
                         </td>
-
-                        <td>
-                            <label for="">Phone </label>
-                        </td>
-                 
-                        <td>
-                            <label for="">Email </label>
-                        </td>
-       
                     </tr>
+
                     <tr>
-                        <?php
-                            while($row = mysqli_fetch_assoc($result)){
-                                
-                        ?> 
-                            <td><?php echo $row['company_name']?></td>
-                            <td><?php echo $row['company_phone']?></td>
-                            <td><?php echo $row['company_email']?></td>
-
+                        <td>
+                            <label for="">Phone </label> <input>
+                        </td>
                     </tr>
-                    <?php
-                            }
-                    ?>
-                    
+
+                    <tr>
+                        <td>
+                            <label for="">Email </label> <input>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label for="">Please enter password to confirm </label> <input>
+                        </td>
+                    </tr>
+
 
                     
             </table>
-                <form action="UpdateInfo.php">
-                    <input type="submit" value="Update Information" style="background-color:azure;" />
+                <form action="informationCompany.php">
+                    <input type="submit" value="Confirm" style="background-color:azure;" />
                 </form>
             </table>
         </div>

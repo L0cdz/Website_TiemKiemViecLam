@@ -31,12 +31,14 @@
 </body>
 
 <?php
+    
     if(isset($_POST['signin'])){
         $username = $_POST['username'];
         $password = $_POST['password'];
         $username = strip_tags(mysqli_real_escape_string($conn, trim($username)));
         $password = strip_tags(mysqli_real_escape_string($conn,trim($password)));
         $query = "SELECT * FROM `login` WHERE `username` = '".$username."'";
+        
         $table = mysqli_query($conn,$query);
         if(mysqli_num_rows($table) > 0){
             $row = mysqli_fetch_array($table);
@@ -44,6 +46,7 @@
             
             if (password_verify($password,$password_hash)){
                 session_start();
+                $_SESSION['id'] = $row['id'];
                 if($row['account_type'] == "admin" ){
                     header("location: Admin/controlAdmin.php");
                 }
