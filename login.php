@@ -54,10 +54,10 @@
                     header("location: Company/controlCompany.php");
                 }
             }
-            else{
-                $message = "Tên đăng nhập hoặc mật khẩu không đúng";
-                echo "<script type='text/javascript'>alert('$message');</script>";
-            }
+        }
+        else{
+            $message = "Tên đăng nhập hoặc mật khẩu không đúng";
+            echo "<script type='text/javascript'>alert('$message');</script>";
         }
 
     }
