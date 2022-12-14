@@ -107,7 +107,7 @@
                         echo "Lương:".$row["salary"]."<br>";
                         echo "Kỹ Năng:".$row["skills_required"]."<br>";
                         echo "<button>Apply</button>";
-                        echo "<button>Love</button>";
+                        echo "<button>Wish List</button>";
                         echo "<hr>";
                     }
                 }else{

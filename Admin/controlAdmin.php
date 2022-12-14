@@ -64,10 +64,10 @@
                 $result = $conn->query($sql);
                 if($result->num_rows>0){
                     while($row = $result->fetch_assoc()){
-                        echo "Tên Công Việc:".$row["job_name"]."<br>";
-                        echo "Mô tả:".$row["description"]."<br>";
-                        echo "Lương:".$row["salary"]."<br>";
-                        echo "Kỹ Năng:".$row["skills_required"]."<br>";
+                        echo "Tên Công Việc: ".$row["job_name"]."<br>";
+                        echo "Mô tả: ".$row["description"]."<br>";
+                        echo "Lương: ".$row["salary"]."<br>";
+                        echo "Kỹ Năng: ".$row["skills_required"]."<br>";
                         echo "<hr>";
                     }
                 }else{

@@ -24,13 +24,13 @@
                 <input type="password" class="form-control" id="cpwd" placeholder="Comfirm Password" name="cpwd" required>
             </div>
             <br>
-            <label>Please choice role:</label>
+            <label>Please choose role:</label>
             <div class="form-group">
-                <input type="radio" id="role_company" name="role">
+                <input type="radio" id="role_company" name="role" checked value="company">
                 <label>Company</label>
             </div>
             <div class="form-group">
-                <input type="radio"id="role_employee" name="role">
+                <input type="radio"id="role_employee" name="role" value="employee">
                 <label>Employee</label>
             </div>
             <br>
@@ -54,6 +54,7 @@
         $username = mysqli_real_escape_string($conn, $_POST['username']);
         $password = mysqli_real_escape_string($conn, $_POST['pwd']);
         $cpassword = mysqli_real_escape_string($conn, $_POST['cpwd']);
+
         $account_type = mysqli_real_escape_string($conn, $_POST['role']);
         
 
@@ -101,12 +102,9 @@
         
             echo ' <div class="alert alert-danger 
                 alert-dismissible fade show" role="alert"> 
-            <strong>Error!</strong> '. $showError.'
+            <strong>!</strong> '. $showError.'
         
-            <button type="button" class="close" 
-                    data-dismiss="alert aria-label="Close">
-                    <span aria-hidden="true">×</span> 
-            </button> 
+            
             </div> '; 
         }
             
@@ -114,11 +112,7 @@
             echo ' <div class="alert alert-danger 
                 alert-dismissible fade show" role="alert">
         
-                <strong>Error!</strong> '. $exists.'
-                <button type="button" class="close" 
-                    data-dismiss="alert" aria-label="Close"> 
-                    <span aria-hidden="true">×</span> 
-                </button>
+                <strong>!</strong> '. $exists.'
             </div> '; 
         }
     }
