@@ -88,6 +88,10 @@ else
                         <td>
                             <label for="">Email </label>
                         </td>
+
+                        <td>
+                            <label for="">ICON </label>
+                        </td>
        
                     </tr>
                     <tr>
@@ -96,8 +100,11 @@ else
                                 
                         ?> 
                             <td><?php echo $row['company_name']?></td>
-                            <td><?php echo $row['company_phone']?></td>
+                            <td><?php echo $row['phone_number']?></td>
                             <td><?php echo $row['company_email']?></td>
+                      
+                            <td><?php echo "<img src='" .  $row['icon'] . "' alt='img' width = '30' height = '30'>";?></td>
+
 
                     </tr>
                     <?php

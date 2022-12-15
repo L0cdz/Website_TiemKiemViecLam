@@ -40,10 +40,10 @@
                             <a class="nav-link" style="color: black;" href="javascript:window.location.href=window.location.href">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: black;"href="Company/controllCompany.php">Contact</a>
+                            <a class="nav-link" style="color: black;"href="#">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: black;" href="Client/controllClient.php">English</a>
+                            <a class="nav-link" style="color: black;" href="#">English</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" 

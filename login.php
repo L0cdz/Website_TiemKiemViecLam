@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require("config.php");
 ?>
 <!DOCTYPE html>
@@ -43,17 +44,27 @@
         if(mysqli_num_rows($table) > 0){
             $row = mysqli_fetch_array($table);
             $password_hash = $row['password'];
-            
             if (password_verify($password,$password_hash)){
-                session_start();
-                $_SESSION['id'] = $row['id'];
+                $_SESSION['log_id'] = $row['log_id'];
                 if($row['account_type'] == "admin" ){
+                    $qc = "SELECT id FROM `admin` WHERE `log_id` ='".$row['log_id']."'";
+                    $tbl = mysqli_query($conn,$qc);
+                    $r = mysqli_fetch_assoc($tbl);
+                    $_SESSION['id'] = $r['id'];
                     header("location: Admin/controlAdmin.php");
                 }
-                elseif($row['account_type'] == "client"){
+                else if($row['account_type'] == "employee"){
+                    $qc = "SELECT id FROM `client` WHERE `log_id` ='".$row['log_id']."'";
+                    $tbl = mysqli_query($conn,$qc);
+                    $r = mysqli_fetch_assoc($tbl);
+                    $_SESSION['id'] = $r['id'];
                     header("location: Client/controlClient.php");
                 }
                 else{
+                    $qc = "SELECT id FROM `company` WHERE `log_id` ='".$row['log_id']."'";
+                    $tbl = mysqli_query($conn,$qc);
+                    $r = mysqli_fetch_assoc($tbl);
+                    $_SESSION['id'] = $r['id'];
                     header("location: Company/controlCompany.php");
                 }
             }

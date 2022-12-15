@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -74,9 +77,10 @@
                 $sql = "INSERT into `login` 
                         (`username`,`password`,`account_type`) 
                         VALUES ('$username','$password_hash','$account_type')";
-            
+
                 $result = mysqli_query($conn, $sql);
-        
+
+                $_SESSION['log_id'] = $conn->insert_id;
                 if ($result) {
                     $showAlert = true; 
                 }

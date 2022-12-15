@@ -28,7 +28,9 @@ CREATE TABLE `Admin`
 );
 INSERT INTO `Admin` VALUES
 ('100',1,'Alter rubber'),
-('101',2,'Donald Trump'),
+('101',6,'Donald Trump'),
+('102',6,'Elon Musk'),
+('103',1,'MySQL');
 
 DROP TABLE IF EXISTS `Company`;
 CREATE TABLE `Company`

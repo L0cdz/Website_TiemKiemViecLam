@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,47 +59,93 @@
     <div style="background-color: #C1EBF9;padding-bottom:10px;height:1080px;">
         <div class="container">
             <h1>Update Company's information</h1>
+            <form method="POST">
+                Company's name: <input type="text" name="name" required><br><br>
+                Phone number: <input type="text" name="phone" required><br><br>
+                E-mail: <input type="text" name="email" required><br><br>
+                Icon Link's: <input type="text" name="icon" required><br><br>
+                Please enter password to confirm: <input type="password" name="pwd" required><br><br>
 
-            <table class="table table-striped" style="margin-top: 10px;" id="tbdata">
-
-                    <tr>
-                        <td>
-                            <label for="">Company name </label> <input>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label for="">Phone </label> <input>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label for="">Email </label> <input>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label for="">Please enter password to confirm </label> <input>
-                        </td>
-                    </tr>
-
-
+                <button type="submit" style="background-color:azure" name="confirm">Confirm</button>
+            </form>
+            <?php
+                $error = true;
+                if(isset($_POST['confirm'])){
+                    include('../config.php');
+                    $name = $_POST['name'];
+                    $phone = $_POST['phone'];
+                    $email = $_POST['email'];
+                    $icon = $_POST['icon'];
+                    #validate email
+                    $query = "Select * from `company` where company_email='$email'"; 
+                    $result = mysqli_query($conn,$query); 
+                    $num = mysqli_num_rows($result);
+                    if($num > 0){
+                        $error = "Email already exist.";
+                    } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                        $error = "Invalid email format";
+                    }
+                    else{
+                        $password = $_POST['pwd'];
+                        $lid = $_SESSION['log_id'];
+                        $query1 = "Select * from `login` where log_id='$lid'";
+                        $table = mysqli_query($conn,$query1);
+                        $row = mysqli_fetch_array($table);
+                        if(!mysqli_num_rows($table) > 0 && password_verify($password,$row['password'])){
+                            $error = "wrong password!";
+                        }
+                        else{
+                            if(isset($_SESSION['log_id'])){
+                                $query = "SELECT * FROM `Company` WHERE `log_id` = '$lid'";
+                                $table = mysqli_query($conn,$query);
+                                #infor exist -> update, else -> insert
+                                if(mysqli_num_rows($table) > 0){
+                                    $q = "UPDATE Company
+                                    SET company_name = '$name', phone_number = '$phone',
+                                    company_email = '$email', icon = NULL
+                                    WHERE id = '$lid'";
+                                } 
+                                else{
+                                    $q = "INSERT into `Company` 
+                                    (`log_id`,`company_name`,`phone_number`,`company_email`,'icon') 
+                                    VALUES ('$name','$phone','$email','$icon')";
+                                }
+                                $result = mysqli_query($conn, $q);
+                                if($result){
+                                    $error = false;
+                                }
+                                
+                            }
+                        }
+                    }
                     
-            </table>
-                <form action="informationCompany.php">
-                    <input type="submit" value="Confirm" style="background-color:azure;" />
-                </form>
-            </table>
+                    if(!$error){
+                        echo "<div class='form'>
+                        <h3 style='text-align: center;'>Update successfully.</h3><br/>
+                        <p class='link'>Click <a href='informationCompany.php'>here</a> to view your informations</p>
+                        </div>";
+                    }
+                    else{
+                        echo "<div class='form'>
+                        <h3 style='text-align: center;'>Something went wrong!.</h3><br/>
+                        <strong>!</strong> '$error'
+                        </div>";
+                    }
+
+                }
+
+               
+            ?>         
+            
         </div>
     </div>
     
     <div class="footer">
         <p style="text-align: center; line-height: 200px; color: black;background-color: #E2DEF5;">Copyright @ Top Jobs 2022</p>
     </div>
-    
+
 </body>
+
+
 
 </html>

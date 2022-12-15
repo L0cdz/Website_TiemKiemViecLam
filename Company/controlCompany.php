@@ -1,3 +1,18 @@
+<?php
+session_start();
+// $id = $_SESSION['id'];
+// if(isset($_SESSION['id']))
+// {
+//     $query = "select *
+//     from `company` join `login` on company.log_id=login.log_id WHERE company.id = $id";
+//     $result = mysqli_query($conn, $query);
+// }
+// else
+// {
+//     header('location:../login.php');
+// }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -88,6 +103,7 @@
         <div class="container">
             <p style='font-size: 40px;'>Công Ty Nổi Bật</p>
             <?php
+                
                 function loadCompany(){
                     include('../config.php'); //db connection
                     $sql = "SELECT * FROM `company`";
