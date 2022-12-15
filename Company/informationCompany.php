@@ -7,6 +7,7 @@ if(isset($_SESSION['id']))
     $query = "select *
     from `company` join `login` on company.log_id=login.log_id WHERE company.id = $id";
     $result = mysqli_query($conn, $query);
+    $result2 = mysqli_query($conn, $query);
 }
 else
 {
@@ -33,7 +34,7 @@ else
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
     </script>
-      
+     
 </head>
 
 <body>
@@ -48,29 +49,36 @@ else
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav ">
-                            <li class="nav-item">
-                                <a class="nav-link" style="color: black;" href="controlCompany.php"> Home </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" style="color: black;"href="informationCompany.php"> Information </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" style="color: black;" href="postJob.php"> Post </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" style="color: black;" href="managementApply.php"> Apply Management </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" 
-                                style="color: #FAF7F0; border-radius:1px solid #393E46;background-color:#CD104D;" 
-                                href="../logout.php">SIGN OUT</a>
-                            </li>
-                        </ul>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: black;" href="controlCompany.php">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: black;" href="informationCompany.php">Information</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: black;" href="postJob.php">Post</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: black;" href="managementApply.php">ManagementApply</a>
+                        </li>
+                        <li class="nav-item">
+                            <?php
+                            while ($row = mysqli_fetch_assoc($result2)) {
+                                echo "<p class='nav-link' style='color: black;'>Xin chào:".$row['company_name']."</p>";
+                            }
+                            ?>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" 
+                            style="color: #FAF7F0; border: 2px solid red;border-radius: 30px;background-color:#CD104D;"
+                            href="../logout.php">SIGN OUT</a>
+                        </li>
+                    </ul>
                 </div>
         </div>
     </nav>
 
-    <div style="background-color: #C1EBF9;padding-bottom:10px;height:1080px;">
+    <div style="background-color: white;padding-bottom:10px;height:1080px;">
         <div class="container">
             <h1>Company's information</h1>
 
@@ -84,15 +92,14 @@ else
                         <td>
                             <label for="">Phone </label>
                         </td>
-  
+
                         <td>
                             <label for="">Email </label>
                         </td>
 
                         <td>
                             <label for="">ICON </label>
-                        </td>
-       
+                        </td>      
                     </tr>
                     <tr>
                         <?php
@@ -101,8 +108,7 @@ else
                         ?> 
                             <td><?php echo $row['company_name']?></td>
                             <td><?php echo $row['phone_number']?></td>
-                            <td><?php echo $row['company_email']?></td>
-                      
+                            <td><?php echo $row['company_email']?></td>                   
                             <td><?php echo "<img src='" .  $row['icon'] . "' alt='img' width = '30' height = '30'>";?></td>
 
 

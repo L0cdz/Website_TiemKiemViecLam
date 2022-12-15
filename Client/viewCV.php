@@ -1,3 +1,19 @@
+<?php
+include_once('../config.php');
+session_start();
+$id = $_SESSION['id'];
+if(isset($_SESSION['id']))
+{
+    $query = "select *
+    from `client` join `login` on client.log_id=login.log_id WHERE client.id = $id";
+    $result = mysqli_query($conn, $query);
+    $result2 = mysqli_query($conn, $query);
+}
+else
+{
+    header('location:../login.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,8 +63,15 @@
                             <a class="nav-link" style="color: black;" href="loveJob.php">LoveJop</a>
                         </li>
                         <li class="nav-item">
+                            <?php
+                            while ($row = mysqli_fetch_assoc($result2)) {
+                                echo "<p class='nav-link' style='color: black;'>Xin chào:".$row['full_name']."</p>";
+                            }
+                            ?>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" 
-                            style="color: #FAF7F0; border-radius:1px solid #393E46;background-color:#CD104D;" 
+                            style="color: #FAF7F0; border: 2px solid red;border-radius: 30px;background-color:#CD104D;" 
                             href="../logout.php">SIGN OUT</a>
                         </li>
                     </ul>

@@ -32,7 +32,7 @@ else
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
     </script>
-    
+
 </head>
 
 <body>
@@ -81,47 +81,8 @@ else
 
     <div style="background-color: white;padding-bottom:10px;height:1080px;">
         <div class="container">
-            <form method='post'style='align-self: center;margin-top:20px;'>
-                <input  style='width:100px;height:50px;' type='submit' value='Thêm' name='btnAdd'></input>
-            </form>
-            <?php
-                function loadCV(){
-                    include('../config.php'); //db connection
-                    $sql = "SELECT * FROM `cv`";
-                    $result = $conn->query($sql);
-                    if($result->num_rows>0){
-                        while($row = $result->fetch_assoc()){ 
-                            echo"<div class='card-job' style='border: 1px solid black;display: flex;padding:20px;margin-top:20px;flex-wrap:wrap;'>";
-                                echo"<div style='margin-right:auto;margin-left:20px'>";
-                                    echo "<p style='font-size: 25px; color: red;'>".$row["name"]."</p>";
-                                    //echo "<p>".$row["details"]."</p>";
-                                echo"</div>";
-                                echo"<form method='post'style='align-self: center;'>";
-                                    echo"<input  style='width:100px;height:50px;' type='submit' value='Sửa' name='btnEdit'></input>";
-                                    echo"<input  style='width:100px;height:50px;' type='submit' value='Xóa' name='btnDele'></input>";
-                                    echo"<input  style='width:100px;height:50px;' type='submit' value='Xem' name='btnView'></input>";
-                                echo"</form>";
-                            echo"</div>";
-                            echo "<style>";
-                            echo ".card-job:hover{
-                                    background-color: #d9ffff;
-                                }";
-                            echo "</style>";
-                        }
-                    }else{
-                        echo "None result";
-                    }
-                    $conn->close();
-                }
-                loadCV();
-                if(isset($_POST["btnView"])){
-                    ?>
-                        <script type='text/javascript'>
-                            window.open('viewCV.php')
-                        </script>"
-                    <?php
-                }
-            ?>
+            <h1>Update Employee's information</h1>
+
             
         </div>
     </div>
@@ -129,7 +90,9 @@ else
     <div class="footer">
         <p style="text-align: center; line-height: 200px; color: black;background-color: #E2DEF5;">Copyright @ Top Jobs 2022</p>
     </div>
-    
+
 </body>
+
+
 
 </html>

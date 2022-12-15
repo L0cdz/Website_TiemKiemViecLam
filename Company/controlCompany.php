@@ -1,16 +1,18 @@
 <?php
+include_once('../config.php');
 session_start();
-// $id = $_SESSION['id'];
-// if(isset($_SESSION['id']))
-// {
-//     $query = "select *
-//     from `company` join `login` on company.log_id=login.log_id WHERE company.id = $id";
-//     $result = mysqli_query($conn, $query);
-// }
-// else
-// {
-//     header('location:../login.php');
-// }
+$id = $_SESSION['id'];
+if(isset($_SESSION['id']))
+{
+    $query = "select *
+    from `company` join `login` on company.log_id=login.log_id WHERE company.id = $id";
+    $result = mysqli_query($conn, $query);
+    $result2 = mysqli_query($conn, $query);
+}
+else
+{
+    header('location:../login.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +38,12 @@ session_start();
 
 <body>
     <header>
-        <p id="text-head">Top Jobs - Company</p>
+        <p id="text-head">Top Jobs - Company</p>  
+
+
+
+
+</table>
     </header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding: 0;">
             <div class="container-fluid" style="background-color: #E2DEF5;padding: 20px;">
@@ -59,8 +66,15 @@ session_start();
                             <a class="nav-link" style="color: black;" href="managementApply.php">ManagementApply</a>
                         </li>
                         <li class="nav-item">
+                            <?php
+                            while ($row = mysqli_fetch_assoc($result2)) {
+                                echo "<p class='nav-link' style='color: black;'>Xin chào:".$row['company_name']."</p>";
+                            }
+                            ?>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" 
-                            style="color: #FAF7F0; border-radius:1px solid #393E46;background-color:#CD104D;" 
+                            style="color: #FAF7F0; border: 2px solid red;border-radius: 30px;background-color:#CD104D;"
                             href="../logout.php">SIGN OUT</a>
                         </li>
                     </ul>
@@ -123,7 +137,7 @@ session_start();
                                 echo"</div>";
                                 echo "<style>";
                                     echo ".card-com:hover{
-                                        background-color: #d9ffff;
+                                        background-color: rgb(251, 246, 221);
                                     }";
                                 echo "</style>";
                             }
@@ -158,13 +172,13 @@ session_start();
                                     echo "<p>".$row["salary"]."</p>";
                                 echo"</div>";
                                 echo"<form method='post'style='align-self: center;'>";
-                                    echo"<input  style='width:100px;height:50px;' type='submit' value='View' name='btnView'></input>";
+                                    echo"<input style='width:100px;height:50px;background-color:#E2DEF5;' type='submit' value='View' name='btnView'></input>";
                                 
                                 echo"</form>";
                             echo"</div>";
                             echo "<style>";
                             echo ".card-job:hover{
-                                    background-color: #d9ffff;
+                                    background-color: rgb(251, 246, 221)
                                 }";
                             echo "</style>";
                         }

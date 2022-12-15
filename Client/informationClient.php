@@ -1,3 +1,19 @@
+<?php
+include_once('../config.php');
+session_start();
+$id = $_SESSION['id'];
+if(isset($_SESSION['id']))
+{
+    $query = "select *
+    from `client` join `login` on client.log_id=login.log_id WHERE client.id = $id";
+    $result = mysqli_query($conn, $query);
+    $result2 = mysqli_query($conn, $query);
+}
+else
+{
+    header('location:../login.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,72 +47,76 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav ">
-                            <li class="nav-item">
-                                <a class="nav-link" style="color: black;"  href="controlClient.php">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" style="color: black;" href="informationClient.php">Information</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" style="color: black;" href="managementApply.php">ManagementApply</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" style="color: black;" href="managementCV.php">ManagementCV</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" style="color: black;" href="loveJob.php">LoveJop</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" 
-                                style="color: #FAF7F0; border-radius:1px solid #393E46;background-color:#CD104D;" 
-                                href="../logout.php">SIGN OUT</a>
-                            </li>
-                        </ul>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: black;"  href="controlClient.php">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: black;" href="informationClient.php">Information</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: black;" href="managementApply.php">ManagementApply</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: black;" href="managementCV.php">ManagementCV</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: black;" href="loveJob.php">LoveJop</a>
+                        </li>
+                        <li class="nav-item">
+                            <?php
+                            while ($row = mysqli_fetch_assoc($result2)) {
+                                echo "<p class='nav-link' style='color: black;'>Xin chào:".$row['full_name']."</p>";
+                            }
+                            ?>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" 
+                            style="color: #FAF7F0; border: 2px solid red;border-radius: 30px;background-color:#CD104D;" 
+                            href="../logout.php">SIGN OUT</a>
+                        </li>
+                    </ul>
                 </div>
         </div>
     </nav>
 
-    <div style="background-color: #C1EBF9;padding-bottom:10px;height:1080px;">
+    <div style="background-color: white;padding-bottom:10px;height:1080px;">
         <div class="container">
-            <h1>Quản Lý Thông Tin</h1>
+            <h1>Employee's information</h1>
 
             <table class="table table-striped" style="margin-top: 10px;" id="tbdata">
-            
-                    <tr>
-                        <td>
-                            <label for="">Username</label> <input>
-                        </td>
-                    
-                    </tr>
-                    
-                    <tr>
-                        <td>
-                            <label for="">Password</label> <input>
-                        </td>
-                    </tr>
 
                     <tr>
                         <td>
-                            <label for="">Full Name</label> <input>
+                            <label for="">Full name </label>
                         </td>
-                    </tr>
 
-                    <tr>
                         <td>
-                            <label for="">SDT</label> <input>
+                            <label for="">Phone </label>
                         </td>
-                    </tr>
 
-                    <tr>
                         <td>
-                            <label for="">Email</label> <input>
+                            <label for="">Email </label>
                         </td>
-                    </tr>
 
-                    
+                    </tr>
+                    <tr>
+                        <?php
+                            while($row = mysqli_fetch_assoc($result)){
+                                
+                        ?> 
+                            <td><?php echo $row['full_name']?></td>
+                            <td><?php echo $row['phone_number']?></td>
+                            <td><?php echo $row['email']?></td>
+
+                    </tr>
+                    <?php
+                            }
+                    ?>         
             </table>
-            
-            <span class="btn btn-primary">Sửa</span>
+                <form action="UpdateInfo.php">
+                    <input type="submit" value="Update Information" style="background-color:azure;" />
+                </form>
+            </table>
         </div>
     </div>
     

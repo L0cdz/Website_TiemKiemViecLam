@@ -51,6 +51,7 @@
                     $tbl = mysqli_query($conn,$qc);
                     $r = mysqli_fetch_assoc($tbl);
                     $_SESSION['id'] = $r['id'];
+
                     header("location: Admin/controlAdmin.php");
                 }
                 else if($row['account_type'] == "employee"){

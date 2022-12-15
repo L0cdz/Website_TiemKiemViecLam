@@ -1,3 +1,21 @@
+<?php
+include_once('../config.php');
+session_start();
+$id = $_SESSION['id'];
+if(isset($_SESSION['id']))
+{
+    $query = "select *
+    from `company` join `login` on company.log_id=login.log_id WHERE company.id = $id";
+    $result = mysqli_query($conn, $query);
+    $result2 = mysqli_query($conn, $query);
+    $result3 = mysqli_query($conn, $query);
+    
+}
+else
+{
+    header('location:../login.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,62 +48,95 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                    <ul class="navbar-nav ">
-                            <li class="nav-item">
-                                <a class="nav-link" style="color: black;" href="controlCompany.php">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" style="color: black;"href="informationCompany.php">Information</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" style="color: black;" href="postJob.php">Post</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" style="color: black;" href="managementApply.php">ManagementApply</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" 
-                                style="color: #FAF7F0; border-radius:1px solid #393E46;background-color:#CD104D;" 
-                                href="../logout.php">SIGN OUT</a>
-                            </li>
+                <ul class="navbar-nav ">
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: black;" href="controlCompany.php">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: black;" href="informationCompany.php">Information</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: black;" href="postJob.php">Post</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: black;" href="managementApply.php">ManagementApply</a>
+                        </li>
+                        <li class="nav-item">
+                            <?php
+                            while ($row = mysqli_fetch_assoc($result2)) {
+                                echo "<p class='nav-link' style='color: black;'>Xin chào:".$row['company_name']."</p>";
+                            }
+                            ?>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" 
+                            style="color: #FAF7F0; border: 2px solid red;border-radius: 30px;background-color:#CD104D;"
+                            href="../logout.php">SIGN OUT</a>
+                        </li>
                     </ul>
                 </div>
         </div>
     </nav>
 
-    <div style="background-color: #C1EBF9;padding-bottom:10px;height:1080px;">
+    <div style="background-color: white;padding-bottom:10px;height:750px;">
         <div class="container">
-            <h1>Đăng bài</h1>
-            <table class="table table-striped" style="margin-top: 10px;" id="tbdata">
+            <h1 style="text-align:center;">Đăng bài</h1>
+            <form method="post">
+                <div class="form-group">
+                    <label for="">Tên Công Việc:</label>
+                    <input type="text" class="form-control" id="job_name" name="job_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Địa chỉ:</label>
+                    <input type="text" class="form-control" id="addr" name="addr" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Vai trò:</label>
+                    <input type="text" class="form-control" id="role" name="role" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Lương:</label>
+                    <input type="text" class="form-control" id="salary" name="salary" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Mô tả:</label>
+                    <input type="text" class="form-control" id="tareaDes" name="tareaDes" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Kỹ năng:</label>
+                    <input type="text" class="form-control" id="tareaSk" name="tareaSk" required>
+                </div>
             
-                    <tr>
-                        <td>
-                            <label for="">Tên Công Việc</label> <input>
-                        </td>
-                    
-                    </tr>
-                    
-                    <tr>
-                        <td>
-                            <label for="">Mô Tả</label> <input>
-                        </td>
-                    </tr>
+                <button id = "subJob" type="submit" class="btn btn-default" name="subJob" style="background-color: gray;">Đăng Bài</button>
+            </form>
 
-                    <tr>
-                        <td>
-                            <label for="">Lương</label> <input>
-                        </td>
-                    </tr>
 
-                    <tr>
-                        <td>
-                            <label for="">SKill</label> <input>
-                        </td>
-                    </tr>
 
-                    
-            </table>
-            <span class="btn btn-primary">Đăng Bài</span>
+            <?php
+                if(isset($_POST['subJob'])){
+                    include('../config.php'); 
+                    $job_name = mysqli_real_escape_string($conn,$_POST['job_name']);
+                    $role = mysqli_real_escape_string($conn,$_POST['role']);
+                    $address = mysqli_real_escape_string($conn,$_POST['addr']);
+                    $salary = mysqli_real_escape_string($conn,$_POST['salary']);
+                    $descrip = mysqli_real_escape_string($conn,$_POST['tareaDes']);
+                    $skill = mysqli_real_escape_string($conn,$_POST['tareaSk']);
+                    while ($row = mysqli_fetch_assoc($result3)) {
+                        $id_com = $row['id'];
+                    }
+                    $sql = "INSERT INTO `job`(`company_id`, `salary`, `description`, `role`, `job_name`, `skills_required`, `address`) 
+                    VALUES ('$id_com ','$salary','$descrip','$role',' $job_name',' $skill','$address')";
+                
+                    if (mysqli_query($conn, $sql)) {
+                        echo "Successfully";
+                    } else {
+                        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                    }
+
+        
+                
+                }
+            ?>
         </div>
     </div>
     
