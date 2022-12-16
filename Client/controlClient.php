@@ -88,7 +88,7 @@ else
         </form>
     </div>
 
-    <div style='display: flex;padding:20px;margin-top:20px;flex-wrap:wrap;margin-left:180px'>
+    <div  style='display: flex;margin-top:20px;margin-left:120px'>
         <div class="w3-content w3-section" style="max-width:1300px">
             <img class="mySlides" src="https://baraqahmutaqqin.com.my/wp-content/uploads/2017/12/banner-02-1300x300.png" style="width:100%">
             <img class="mySlides" src="https://www.rmit.edu.vn/content/dam/rmit/vn/en/assets-for-production/images/events/sbm/hr-forum-2020/hr-forum-2020-event-banner-1300x300.jpg" style="width:100%">

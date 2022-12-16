@@ -90,14 +90,14 @@ else
                         while($row = $result->fetch_assoc()){
                             echo"<div class='card-job' style='border: 1px solid black;display: flex;padding:20px;margin-top:20px;flex-wrap:wrap;'>";
                                 echo"<div style='margin-right:auto;margin-left:20px'>";
-                                    echo "<p style='font-size: 25px; color: red;'>".$row["name"]."</p>";
-                                    echo "<p>Tên :".$row["infor"]."</p>";
-                                    echo "<p>Học vấn :".$row["education"]."</p>";
-                                    echo "<p>Kinh nghiệm :".$row["exp"]."</p>";
-                                    echo "<p>Kỹ năng :".$row["skill"]."</p>";
-                                    echo "<p>Chứng chỉ :".$row["certificate"]."</p>";
-                                    echo "<p>Liên hệ :".$row["contact"]."</p>";
-                                    
+                                    echo "<image src='https://p.kindpng.com/picc/s/78-785827_user-profile-avatar-login-account-male-user-icon.png'>";
+                                    echo "<p><p style='font-size:25px;font-style:bold;'>Họ và Tên:</p>".$row["infor"]."</p>";
+                                    echo "<p><p style='font-size:25px;font-style:bold;'>Học vấn:</p>".$row["education"]."</p>";
+                                    echo "<p><p style='font-size:25px;font-style:bold;'>Kinh nghiệm:</p>".$row["exp"]."</p>";
+                                    echo "<p><p style='font-size:25px;font-style:bold;'>Kỹ năng:</p>".$row["skill"]."</p>";
+                                    echo "<p><p style='font-size:25px;font-style:bold;'>Chứng chỉ:</p>".$row["certificate"]."</p>";
+                                    echo "<p><p style='font-size:25px;font-style:bold;'>Liên hệ:</p>".$row["contact"]."</p>";
+
                                 echo"</div>";
                                 echo"<form method='post'style='align-self: center;'>";
                                     echo"<input  style='width:100px;height:50px;' type='submit' value='Sửa' name='btnEdit'></input>";
