@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -74,19 +71,17 @@ session_start();
         
                 $password_hash = password_hash($password,PASSWORD_BCRYPT);
                 
-                $sql = "INSERT into `login` 
+                $sql = "INSERT into `login`
                         (`username`,`password`,`account_type`) 
                         VALUES ('$username','$password_hash','$account_type')";
 
                 $result = mysqli_query($conn, $sql);
-
-                $_SESSION['log_id'] = $conn->insert_id;
                 if ($result) {
                     $showAlert = true; 
                 }
             } 
             else { 
-                $showError = "Passwords do not match"; 
+                $showError = "Password do not match"; 
             }      
         }
     
@@ -96,14 +91,7 @@ session_start();
             <p class='link'>Click here to <a href='login.php'>Login</a></p>
             </div>";
         }
-        else{
-            echo "<div class='form'>
-            <h3 style='text-align: center;'>Required fields are missing</h3><br/>
-            </div>";
-        }
-        
-        if($showError) {
-        
+        else if($showError) {
             echo ' <div class="alert alert-danger 
                 alert-dismissible fade show" role="alert"> 
             <strong>!</strong> '. $showError.'
@@ -112,7 +100,7 @@ session_start();
             </div> '; 
         }
             
-        if($exists) {
+        else if($exists) {
             echo ' <div class="alert alert-danger 
                 alert-dismissible fade show" role="alert">
         

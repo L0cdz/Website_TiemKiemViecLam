@@ -1,5 +1,17 @@
 <?php
 session_start();
+$username = $_SESSION['username'];
+if(isset($_SESSION['username']))
+{
+    $query = "select *
+    from `company` join `login` on company.log_id=login.log_id WHERE username = '$username'";
+    $result = mysqli_query($conn, $query);
+    $result2 = mysqli_query($conn, $query);
+}
+else
+{
+    header('location:../login.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

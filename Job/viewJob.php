@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Top Jobs</title>
+    <title>Job List</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -46,7 +49,8 @@
         <?php
             function loadJob(){
                     include('../config.php'); //db connection
-                    $sql = "SELECT * FROM `job`";
+                    $jid = $_SESSION['job_id'];
+                    $sql = "SELECT * FROM `job` where job_id=$jid";
                     $result = $conn->query($sql);
                     if($result->num_rows>0){
                         while($row = $result->fetch_assoc()){

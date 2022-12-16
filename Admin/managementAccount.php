@@ -1,11 +1,11 @@
 <?php
 include_once('../config.php');
 session_start();
-$id = $_SESSION['id'];
-if(isset($_SESSION['id']))
+$username = $_SESSION['username'];
+if(isset($_SESSION['username']))
 {
     $query = "select *
-    from `admin` join `login` on admin.log_id=login.log_id WHERE admin.id = $id";
+    from `admin` join `login` on admin.log_id=login.log_id WHERE username = '$username'";
     $result = mysqli_query($conn, $query);
 }
 else

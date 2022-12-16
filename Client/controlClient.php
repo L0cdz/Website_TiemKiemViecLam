@@ -1,13 +1,15 @@
 <?php
 include_once('../config.php');
 session_start();
-$id = $_SESSION['id'];
-if(isset($_SESSION['id']))
+$username = $_SESSION['username'];
+if(isset($_SESSION['username']))
 {
     $query = "select *
-    from `client` join `login` on client.log_id=login.log_id WHERE client.id = $id";
+    from `client` join `login` on client.log_id=login.log_id WHERE username = '$username'";
     $result = mysqli_query($conn, $query);
     $result2 = mysqli_query($conn, $query);
+    $row = mysqli_fetch_array($result);
+    $uid = $row['id'];
 }
 else
 {
@@ -60,7 +62,7 @@ else
                             <a class="nav-link" style="color: black;" href="managementCV.php">ManagementCV</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: black;" href="loveJob.php">LoveJop</a>
+                            <a class="nav-link" style="color: black;" href="loveJob.php">LoveJob</a>
                         </li>
                         <li class="nav-item">
                             <?php
@@ -167,7 +169,7 @@ else
                                     echo "<p>".$row["address"]."</p>";
                                     echo "<p>".$row["salary"]."</p>";
                                 echo"</div>";
-                                echo"<form method='post'style='align-self: center;'>";
+                                echo"<form method='POST'style='align-self: center;'>";
                                     echo"<input  style='width:100px;height:50px;background-color:#E2DEF5;' type='submit' value='View' name='btnView'></input>";
                                     echo"<input  style='width:50px;height:50px;background-color:#E2DEF5;' type='submit' value='♡' name='btnLove'></input>";
                                 echo"</form>";
@@ -184,7 +186,12 @@ else
                     $conn->close();
                 }
                 loadJob();
+
                 if(isset($_POST["btnView"])){
+                    $q1 = "SELECT * FROM `job` WHERE job.emp_id = $uid";
+                    $table = mysqli_query($conn,$q1);
+                    $row = mysqli_fetch_array($table);
+                    $_SESSION['job_id'] = $row['job_id'];
                     ?>
                         <script type='text/javascript'>
                             window.open('../Job/viewJob.php')

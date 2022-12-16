@@ -1,6 +1,6 @@
-<?php
+<?php   
+    include("config.php");
     session_start();
-    require("config.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,8 +32,9 @@
 </body>
 
 <?php
-    
+    $message = "Tên đăng nhập hoặc mật khẩu không đúng";    
     if(isset($_POST['signin'])){
+    
         $username = $_POST['username'];
         $password = $_POST['password'];
         $username = strip_tags(mysqli_real_escape_string($conn, trim($username)));
@@ -45,33 +46,31 @@
             $row = mysqli_fetch_array($table);
             $password_hash = $row['password'];
             if (password_verify($password,$password_hash)){
+        
                 $_SESSION['log_id'] = $row['log_id'];
                 if($row['account_type'] == "admin" ){
-                    $qc = "SELECT id FROM `admin` WHERE `log_id` ='".$row['log_id']."'";
-                    $tbl = mysqli_query($conn,$qc);
-                    $r = mysqli_fetch_assoc($tbl);
-                    $_SESSION['id'] = $r['id'];
-
-                    header("location: Admin/controlAdmin.php");
+                    $_SESSION['username'] = $username;
+                    header("Location: Admin/controlAdmin.php");
+                    exit();
                 }
                 else if($row['account_type'] == "employee"){
-                    $qc = "SELECT id FROM `client` WHERE `log_id` ='".$row['log_id']."'";
-                    $tbl = mysqli_query($conn,$qc);
-                    $r = mysqli_fetch_assoc($tbl);
-                    $_SESSION['id'] = $r['id'];
-                    header("location: Client/controlClient.php");
+                    $_SESSION['username'] = $username;
+                    header("Location: Client/controlClient.php");
+                    exit();
                 }
                 else{
-                    $qc = "SELECT id FROM `company` WHERE `log_id` ='".$row['log_id']."'";
-                    $tbl = mysqli_query($conn,$qc);
-                    $r = mysqli_fetch_assoc($tbl);
-                    $_SESSION['id'] = $r['id'];
-                    header("location: Company/controlCompany.php");
+                
+                    $_SESSION['username'] = $username;
+                    header("Location: Company/controlCompany.php");
+                    exit();
                 }
+            }
+            else{
+                echo "<script type='text/javascript'>alert('$message');</script>";
             }
         }
         else{
-            $message = "Tên đăng nhập hoặc mật khẩu không đúng";
+            
             echo "<script type='text/javascript'>alert('$message');</script>";
         }
 
