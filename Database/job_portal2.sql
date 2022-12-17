@@ -33,7 +33,6 @@ INSERT INTO `admin` (`id`, `log_id`, `name`) VALUES
 
 CREATE TABLE `apply` (
   `apply_id` int(10) NOT NULL,
-  `company_id` int(10) NOT NULL,
   `client_id` int(10) NOT NULL,
   `job_id` int(10) NOT NULL,
   `apply_date` date DEFAULT NULL
@@ -43,9 +42,9 @@ CREATE TABLE `apply` (
 -- Đang đổ dữ liệu cho bảng `apply`
 --
 
-INSERT INTO `apply` (`apply_id`, `company_id`, `client_id`, `job_id`, `apply_date`) VALUES
-(11, 1000, 5000, 222, '2022-11-04'),
-(22, 1002, 5001, 225, '2022-11-04');
+INSERT INTO `apply` (`apply_id`, `client_id`, `job_id`, `apply_date`) VALUES
+(11, 5000, 222, '2022-11-04'),
+(22, 5001, 225, '2022-11-04');
 
 -- --------------------------------------------------------
 
@@ -253,7 +252,6 @@ ALTER TABLE `admin`
 ALTER TABLE `apply`
   ADD PRIMARY KEY (`apply_id`),
   ADD KEY `client_id` (`client_id`),
-  ADD KEY `company_id` (`company_id`),
   ADD KEY `job_id` (`job_id`);
 
 --
@@ -342,6 +340,8 @@ ALTER TABLE `job`
 --
 -- Các ràng buộc cho các bảng đã đổ
 --
+ALTER TABLE `apply`
+  MODIFY `apply_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Các ràng buộc cho bảng `admin`
@@ -354,7 +354,6 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `apply`
   ADD CONSTRAINT `apply_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `client` (`id`),
-  ADD CONSTRAINT `apply_ibfk_2` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`),
   ADD CONSTRAINT `apply_ibfk_3` FOREIGN KEY (`job_id`) REFERENCES `job` (`job_id`);
 
 --
