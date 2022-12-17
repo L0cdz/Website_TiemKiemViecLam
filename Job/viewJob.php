@@ -24,7 +24,7 @@ session_start();
 
 <body>
     <header>
-        <p id="text-head">Top Jobs</p>
+        <p id="text-head"><a href="../Client/controlClient.php">Top Jobs</a></p>
     </header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding: 0;">
             <div class="container-fluid" style="background-color: #E2DEF5;padding: 20px;">
@@ -48,36 +48,36 @@ session_start();
         <div class="container">
         <?php
             function loadJob(){
-                    include('../config.php'); //db connection
-                    $jid = $_SESSION['job_id'];
-                    $sql = "SELECT * FROM `job` where job_id=$jid";
-                    $result = $conn->query($sql);
-                    if($result->num_rows>0){
-                        while($row = $result->fetch_assoc()){
-                            echo"<div class='card-job' style='border: 1px solid black;display: flex;padding:20px;margin-top:20px;flex-wrap:wrap;'>";
-                                echo"<div style='margin-right:auto;margin-left:20px'>";
-                                    echo "<p style='font-size: 25px; color: red;'>".$row["job_name"]."</p>";
-                                    echo "<p>Mô tả :".$row["description"]."</p>";
-                                    echo "<p>Kỹ năng :".$row["skills_required"]."</p>";
-                                    echo "<p>Lương :".$row["salary"]."</p>";
-                                    echo "<p>Vai trò :".$row["role"]."</p>";
-                                    echo "<p>Địa chỉ :".$row["address"]."</p>";
-                                    
-                                echo"</div>";
+                include('../config.php'); //db connection
+                // $jid = $_SESSION['job_id'];
+                $idjob = $_GET['idjob'];
+                $sql = "SELECT * FROM `job` where job_id=$idjob";
+                $result = $conn->query($sql);
+                if($result->num_rows>0){
+                    while($row = $result->fetch_assoc()){
+                        echo"<div class='card-job' style='border: 1px solid black;display: flex;padding:20px;margin-top:20px;flex-wrap:wrap;'>";
+                            echo"<div style='margin-right:auto;margin-left:20px'>";
+                                echo "<p style='font-size: 25px; color: red;'>".$row["job_name"]."</p>";
+                                echo "<p>Mô tả :".$row["description"]."</p>";
+                                echo "<p>Kỹ năng :".$row["skills_required"]."</p>";
+                                echo "<p>Lương :".$row["salary"]."</p>";
+                                echo "<p>Vai trò :".$row["role"]."</p>";
+                                echo "<p>Địa chỉ :".$row["address"]."</p>";            
                             echo"</div>";
-                            echo "<style>";
-                            echo ".card-job:hover{
-                                    background-color: #d9ffff;
-                                }";
-                            echo "</style>";
-                        }
-                    }else{
-                        echo "None result";
+                        echo"</div>";
+                        echo "<style>";
+                        echo ".card-job:hover{
+                                background-color: #d9ffff;
+                            }";
+                        echo "</style>";
                     }
-                    $conn->close();
+                }else{
+                    echo "None result";
                 }
+                $conn->close();
+            }
                 loadJob();
-            ?> 
+        ?> 
         </div>
     </div>
     

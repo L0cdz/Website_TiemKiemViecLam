@@ -1,18 +1,6 @@
 <?php
 include_once('../config.php');
 session_start();
-$username = $_SESSION['username'];
-if(isset($_SESSION['username']))
-{
-    $query = "select *
-    from `client` join `login` on client.log_id=login.log_id WHERE username = '$username'";
-    $result = mysqli_query($conn, $query);
-    $result2 = mysqli_query($conn, $query);
-}
-else
-{
-    header('location:../login.php');
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,13 +50,7 @@ else
                         <li class="nav-item">
                             <a class="nav-link" style="color: black;" href="loveJob.php">LoveJop</a>
                         </li>
-                        <li class="nav-item">
-                            <?php
-                            while ($row = mysqli_fetch_assoc($result2)) {
-                                echo "<p class='nav-link' style='color: black;'>Xin chào:".$row['full_name']."</p>";
-                            }
-                            ?>
-                        </li>
+            
                         <li class="nav-item">
                             <a class="nav-link" 
                             style="color: #FAF7F0; border: 2px solid red;border-radius: 30px;background-color:#CD104D;" 
@@ -84,8 +66,10 @@ else
         <?php
             function loadJob(){
                     include('../config.php'); //db connection
-                    $sql = "SELECT * FROM `cv`";
+                    $id = $_GET['id'];
+                    $sql = "SELECT * FROM `cv` where id=$id";
                     $result = $conn->query($sql);
+
                     if($result->num_rows>0){
                         while($row = $result->fetch_assoc()){
                             echo"<div class='card-job' style='border: 1px solid black;display: flex;padding:20px;margin-top:20px;flex-wrap:wrap;'>";

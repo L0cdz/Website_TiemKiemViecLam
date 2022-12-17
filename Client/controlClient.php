@@ -9,7 +9,6 @@ if(isset($_SESSION['username']))
     $result = mysqli_query($conn, $query);
     $result2 = mysqli_query($conn, $query);
     $row = mysqli_fetch_array($result);
-    $uid = $row['id'];
 }
 else
 {
@@ -152,13 +151,13 @@ else
             ?> 
             <p style='font-size: 40px;'>Việc Làm IT Chất</p>
             <?php
-            function loadJob(){
+
                     include('../config.php'); //db connection
                     $sql = "SELECT * FROM `job`";
                     $result = $conn->query($sql);
                     if($result->num_rows>0){
                         while($row = $result->fetch_assoc()){
-                            
+                            $id = $row['job_id'];
                             echo"<div class='card-job' style='border: 1px solid black;display: flex;padding:20px;margin-top:20px;flex-wrap:wrap;'>";
                                 echo "<div>";
                                     echo "<image src='https://cdn4.iconfinder.com/data/icons/social-media-logos-6/512/71-github-256.png' style='width:200px;height:100px;'></image>";
@@ -170,8 +169,9 @@ else
                                     echo "<p>".$row["salary"]."</p>";
                                 echo"</div>";
                                 echo"<form method='POST'style='align-self: center;'>";
-                                    echo"<input  style='width:100px;height:50px;background-color:#E2DEF5;' type='submit' value='View' name='btnView'></input>";
-                                    echo"<input  style='width:50px;height:50px;background-color:#E2DEF5;' type='submit' value='♡' name='btnLove'></input>";
+                                    echo"<a  href=\"../Job/viewJob.php?idjob=$id\" style='width:100px;height:50px;background-color:#E2DEF5;'  value='View' name='btnView'>View</a>";
+                                    echo "<br>";
+                                    echo"<a  href=\"loveJob.php?idjob=$id\" style='width:50px;height:50px;background-color:#E2DEF5;'  value='View' name='btnView'>♡</a>";
                                 echo"</form>";
                             echo"</div>";
                             echo "<style>";
@@ -184,23 +184,7 @@ else
                         echo "None result";
                     }
                     $conn->close();
-                }
-                loadJob();
-
-                if(isset($_POST["btnView"])){
-                    $q1 = "SELECT * FROM `job` WHERE job.emp_id = $uid";
-                    $table = mysqli_query($conn,$q1);
-                    $row = mysqli_fetch_array($table);
-                    $_SESSION['job_id'] = $row['job_id'];
-                    ?>
-                        <script type='text/javascript'>
-                            window.open('../Job/viewJob.php')
-                        </script>"
-                    <?php
-                }
-                if(isset($_POST["btnLove"])){
-                    echo '<script>alert("Da Luu Vao Danh Sach Yeu Thich")</script>';
-                }
+                
             ?> 
         </div>
     </div>

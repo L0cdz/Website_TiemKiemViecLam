@@ -85,12 +85,13 @@ else
                 <input  style='width:100px;height:50px;' type='submit' value='Thêm' name='btnAdd'></input>
             </form>
             <?php
-                function loadCV(){
+
                     include('../config.php'); //db connection
                     $sql = "SELECT * FROM `cv`";
                     $result = $conn->query($sql);
                     if($result->num_rows>0){
                         while($row = $result->fetch_assoc()){ 
+                            $id = $row['id'];
                             echo"<div class='card-job' style='border: 1px solid black;display: flex;padding:20px;margin-top:20px;flex-wrap:wrap;'>";
                                 echo"<div style='margin-right:auto;margin-left:20px'>";
                                     echo "<p style='font-size: 25px; color: red;'>".$row["name"]."</p>";
@@ -99,7 +100,7 @@ else
                                 echo"<form method='post'style='align-self: center;'>";
                                     echo"<input  style='width:100px;height:50px;' type='submit' value='Sửa' name='btnEdit'></input>";
                                     echo"<input  style='width:100px;height:50px;' type='submit' value='Xóa' name='btnDele'></input>";
-                                    echo"<input  style='width:100px;height:50px;' type='submit' value='Xem' name='btnView'></input>";
+                                    echo"<a  href=\"viewCV.php?id=$id\" style='width:50px;height:50px;background-color:#E2DEF5;'  value='View' name='btnView'>View</a>";
                                 echo"</form>";
                             echo"</div>";
                             echo "<style>";
@@ -112,15 +113,7 @@ else
                         echo "None result";
                     }
                     $conn->close();
-                }
-                loadCV();
-                if(isset($_POST["btnView"])){
-                    ?>
-                        <script type='text/javascript'>
-                            window.open('viewCV.php')
-                        </script>"
-                    <?php
-                }
+                
             ?>
             
         </div>
