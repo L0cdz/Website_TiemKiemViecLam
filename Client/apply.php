@@ -18,7 +18,7 @@ $date = date("Y-m-d");
 $q1=mysqli_query($conn,"SELECT * FROM `apply` WHERE apply.client_id =$eid"); 
 if(mysqli_num_rows($q1)>0){
     echo " <div class='alert alert-danger alert-dismissible' role='alert'>
-           <p style='font-size: 30px'><strong>Note:</strong> You have already applied this job!</p>
+        <p style='font-size: 30px;margin-left:600px;'><strong>Note:</strong> You have already applied this job!</p>
         </div>";
 }
 else{
@@ -31,8 +31,8 @@ else{
         $q4=mysqli_query($conn,"SELECT * from client join `apply` on client.id=apply.client_id where client.id=$eid");
         $row=mysqli_fetch_array($q4);
         echo " <div class='alert alert-success alert-dismissible' role='alert'>
-           <p style='font-size: 25px'><strong>Note:</strong> Success</p>
-           <html>
+        <p style='font-size: 25px'><strong>Note:</strong> Success</p>
+        <html>
                 <head>
                     <h3>Congratulation $row[full_name] successfully Applied For $q2re[job_name]</h3>
                 </head>
@@ -54,7 +54,7 @@ else{
         echo " <div class='alert alert-danger alert-dismissible' role='alert'>
             <button type='button' class='close'  data-dismiss='alert' aria-label='Close'><span
                     aria-hidden='true'>&times;</span></button>
-           <p style='font-size: 20px'><strong>Oops!:</strong> Something went wrong!</p>
+        <p style='font-size: 20px'><strong>Oops!:</strong> Something went wrong!</p>
         </div>";
     }
 
@@ -69,6 +69,6 @@ else{
     <title>Apply</title>
 </head>
 <body>
-    <!-- button go back here -->
+    <a href="../Client/controlClient.php" style="margin-left:800px;font-size:30px;">Trang Chủ</a>
 </body>
 </html>

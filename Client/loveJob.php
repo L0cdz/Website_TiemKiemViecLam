@@ -60,7 +60,7 @@ else
                             <a class="nav-link" style="color: black;" href="managementCV.php">ManagementCV</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: black;" href="loveJob.php">LoveJop</a>
+                            <a class="nav-link" style="color: black;" href="loveJob.php">Job</a>
                         </li>
                         <li class="nav-item">
                             <?php
@@ -81,25 +81,46 @@ else
 
     <div style="background-color: white;padding-bottom:10px;height:1080px;">
         <div class="container">
-        <h1>Danh sách Job Yêu thích</h1>
+        <?php
 
-            <table class="table table-striped" style="margin-top: 10px;" id="tbdata">
-                <thead>
-                    <tr>
-                        <th>Tên Job</th>
-                        <th>Mô tả</th>
-                        <th>Lương</th>
-                        <th>Skill</th>
-                        <th>Thao tác</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </div>
+            include('../config.php'); //db connection
+            $sql = "SELECT * FROM `joblove`";
+            $result = $conn->query($sql);
+            if($result->num_rows>0){
+                while($row = $result->fetch_assoc()){
+                    $id = $row['job_id'];
+                    echo"<div class='card-job' style='border-radius:40px;border: 1px solid #ccc;display: flex;padding:20px;margin-top:20px;flex-wrap:wrap;'>";
+                        echo "<div>";
+                            echo "<image src='https://cdn4.iconfinder.com/data/icons/social-media-logos-6/512/71-github-256.png' style='width:200px;height:100px;'></image>";
+                        echo"</div>";
+                        echo"<div style='margin-right:auto;margin-left:20px'>";
+                            echo "<p style='font-size: 25px; color: red;'>".$row["job_name"]."</p>";
+                            echo "<p>".$row["skills_required"]."</p>";
+                            echo "<p>".$row["address"]."</p>";
+                            echo "<p>".$row["salary"]."</p>";
+                        echo"</div>";
+                        echo"<form method='POST'style='align-self: center;'>";
+                            echo"<a  href=\"../Job/viewJob.php?idjob=$id\" style='border-radius:10px;text-decoration:none;padding:15px 25px;margin-top:20px;display:inline-block;border:1px solid #ccc;background-color:#ccc;'   value='View' name='btnView'>Xem</a>";
+                            echo "<br>";
+                            echo"<a  href=\"deleteLoveJob.php?id=$id\" style='border-radius:10px;text-decoration:none;padding:15px 25px;margin-top:20px;display:inline-block;border:1px solid #ccc;background-color:#ccc;'   value='View' name='btnView'>Xóa</a>";
+                        echo"</form>";
+                    echo"</div>";
+                    echo "<style>";
+                    echo ".card-job:hover{
+                            background-color: rgb(251, 246, 221);
+                        }";
+                    echo "</style>";
+                }
+            }else{
+                echo "Không Có Công Việc Yêu Thích";
+            }
+            $conn->close();
+
+        ?> 
     </div>
     
     <div class="footer">
-        <p style="text-align: center; line-height: 200px; color: black;background-color: #E2DEF5;">Copyright @ Top Jobs 2022</p>
+        <p style="text-align: center; line-height: 200px; color: black;background-color: #E2DEF5;margin-top:20px;">Copyright @ Top Jobs 2022</p>
     </div>
     
 </body>

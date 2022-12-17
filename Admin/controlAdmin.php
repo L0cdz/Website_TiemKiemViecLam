@@ -47,7 +47,7 @@ else
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav ">
                         <li class="nav-item">
-                            <a class="nav-link" style="color: black;" href="javascript:window.location.href=window.location.href">Home</a>
+                            <a class="nav-link" style="color: black;" href="controlAdmin.php">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" style="color: black;" href="managementPost.php">ManagementPost</a>
@@ -73,12 +73,14 @@ else
     </nav>
 
     <div class="container-search" style="padding: 20px;background-color: #EEE4C1;">
-        <form class="form-inline my-2 my-lg-0" style=" display: flex;">
+        <form class="form-inline my-2 my-lg-0" style=" display: flex;line-height: 40px;">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+
         </form>
     </div>
-    <div  style='display: flex;margin-top:20px;margin-left:120px'>
+
+    <div  style='display: flex;margin-top:20px;margin:auto; justify-content: center;'>
         <div class="w3-content w3-section" style="max-width:1300px">
             <img class="mySlides" src="https://baraqahmutaqqin.com.my/wp-content/uploads/2017/12/banner-02-1300x300.png" style="width:100%">
             <img class="mySlides" src="https://www.rmit.edu.vn/content/dam/rmit/vn/en/assets-for-production/images/events/sbm/hr-forum-2020/hr-forum-2020-event-banner-1300x300.jpg" style="width:100%">
@@ -115,17 +117,17 @@ else
                         echo"<div style='display:flex; justify-content: space-between; flex-wrap:wrap;'>";
                         while($row = $result->fetch_assoc()){
                             if($limit<10){
-                                echo"<div class='card-com' style='border: 1px solid black;display: inline-block;padding:20px;flex-wrap:wrap;margin-top:20px;'>";
+                                echo"<div class='card-com' style='border-radius:40px;border: 1px solid #ccc;display: inline-block;padding:20px;flex-wrap:wrap;margin-top:20px;'>";
                                     echo "<div>";
-                                        echo "<image src='https://cdn4.iconfinder.com/data/icons/social-media-logos-6/512/71-github-256.png' style='width:200px;height:100px;'></image>";
+                                        echo "<image src='".$row['icon']."' style='width:200px;height:200px;'></image>";
                                     echo"</div>";
                                     echo"<div>";
-                                        echo "<p style='font-size: 25px; color: red;'>".$row["company_name"]."</p>";           
+                                        echo "<p style='font-size: 25px; text-align: center;'>".$row["company_name"]."</p>";           
                                     echo"</div>";
                                 echo"</div>";
                                 echo "<style>";
                                     echo ".card-com:hover{
-                                        background-color: #d9ffff;
+                                        background-color: rgb(251, 246, 221);
                                     }";
                                 echo "</style>";
                             }
@@ -142,39 +144,43 @@ else
             ?> 
             <p style='font-size: 40px;'>Việc Làm IT Chất</p>
             <?php
-            function loadJob(){
+
                     include('../config.php'); //db connection
-                    $sql = "SELECT * FROM `job`";
+                   // $sql = "SELECT * FROM `job`";
+                    $sql = "SELECT * FROM company INNER JOIN job ON job.company_id=company.id";
                     $result = $conn->query($sql);
+                   // $result1 = $conn->query($sql1);
                     if($result->num_rows>0){
                         while($row = $result->fetch_assoc()){
-                            
-                            echo"<div class='card-job' style='border: 1px solid black;display: flex;padding:20px;margin-top:20px;flex-wrap:wrap;'>";
-                                echo "<div>";
-                                    echo "<image src='https://cdn4.iconfinder.com/data/icons/social-media-logos-6/512/71-github-256.png' style='width:200px;height:100px;'></image>";
+                                $id = $row['job_id'];
+                                echo"<div class='card-job' style='border-radius:40px;border: 1px solid #ccc;display: flex;padding:20px;margin-top:20px;flex-wrap:wrap;'>";
+                                    echo "<div>";
+                                        echo "<image src='".$row['icon']."' style='width:200px;height:200px;'></image>";
+                                    echo"</div>";
+                                    echo"<div style='margin-right:auto;margin-left:20px'>";
+                                        echo "<p style='font-size: 25px; color: red;'>".$row["job_name"]."</p>";
+                                        echo "<p>Kỹ năng:".$row["skills_required"]."</p>";
+                                        echo "<p>Địa chỉ:".$row["address"]."</p>";
+                                        echo "<p>Lương".$row["salary"]."</p>";
+                                        echo "<p>Ngày đăng:".$row["datePost"]."</p>";
+                                    echo"</div>";
+                                    echo"<form method='POST'style='align-self: center;'>";
+                
+                                    echo"</form>";
                                 echo"</div>";
-                                echo"<div style='margin-right:auto;margin-left:20px'>";
-                                    echo "<p style='font-size: 25px; color: red;'>".$row["job_name"]."</p>";
-                                    echo "<p>".$row["skills_required"]."</p>";
-                                    echo "<p>".$row["address"]."</p>";
-                                    echo "<p>".$row["salary"]."</p>";
-                                echo"</div>";
-                                echo"<div style='align-self: center;'>";
-                                    echo"<input  style='width:100px;height:50px;background-color:#E2DEF5;' type='submit' value='View' name='btnView'></input>";
-                                echo"</div>";
-                            echo"</div>";
-                            echo "<style>";
-                            echo ".card-job:hover{
-                                    background-color: rgb(251, 246, 221);
-                                }";
-                            echo "</style>";
-                        }
+                                echo "<style>";
+                                echo ".card-job:hover{
+                                        background-color: rgb(251, 246, 221);
+                                    }";
+                                echo "</style>";
+                            }
+
+                        
                     }else{
                         echo "None result";
                     }
                     $conn->close();
-                }
-                loadJob();
+                
             ?> 
         </div>
     </div>

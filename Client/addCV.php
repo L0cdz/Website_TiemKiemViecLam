@@ -5,9 +5,10 @@ $username = $_SESSION['username'];
 if(isset($_SESSION['username']))
 {
     $query = "select *
-    from `client` join `login` on client.log_id=login.log_id WHERE username = '$username'";
+    from `company` join `login` on company.log_id=login.log_id WHERE username = '$username'";
     $result = mysqli_query($conn, $query);
     $result2 = mysqli_query($conn, $query);
+    $result3 = mysqli_query($conn, $query);
 }
 else
 {
@@ -32,12 +33,12 @@ else
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
     </script>
-
+    
 </head>
 
 <body>
     <header>
-        <p id="text-head">Top Jobs - Employee</p>
+        <p id="text-head">Top Jobs - Company</p>
     </header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding: 0;">
             <div class="container-fluid" style="background-color: #E2DEF5;padding: 20px;">
@@ -46,6 +47,7 @@ else
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            
                     <ul class="navbar-nav ">
                         <li class="nav-item">
                             <a class="nav-link" style="color: black;"  href="controlClient.php">Home</a>
@@ -60,7 +62,7 @@ else
                             <a class="nav-link" style="color: black;" href="managementCV.php">ManagementCV</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: black;" href="loveJob.php">LoveJop</a>
+                            <a class="nav-link" style="color: black;" href="loveJob.php">LoveJob</a>
                         </li>
                         <li class="nav-item">
                             <?php
@@ -75,24 +77,83 @@ else
                             href="../logout.php">SIGN OUT</a>
                         </li>
                     </ul>
-                </div>
+            </div>
+
         </div>
     </nav>
 
-    <div style="background-color: white;padding-bottom:10px;height:1080px;">
+    <div style="background-color: white;padding-bottom:10px;height:750px;">
         <div class="container">
-            <h1>Update Employee's information</h1>
-
+            <h1 style="text-align:center;">Tạo CV</h1>
+            <form method="post">
+                <div class="form-group">
+                    <label for="">Họ Và Tên:</label>
+                    <input type="text" class="form-control"  name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Liên Hệ:</label>
+                    <input type="text" class="form-control" name="cont" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Thông Tin:</label>
+                    <input type="text" class="form-control"  name="infor" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Giáo Dục:</label>
+                    <input type="text" class="form-control"name="edu" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Kinh Nghiệm:</label>
+                    <input type="text" class="form-control"  name="tareaExp" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Kỹ Năng:</label>
+                    <input type="text" class="form-control"  name="tareaSk" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Chứng Chỉ:</label>
+                    <input type="text" class="form-control"  name="tareaCf" required>
+                </div>
             
+                <button id = "subJob" type="submit" class="btn btn-default" name="subJob" style="background-color: gray;justify-content: center;">Tạo</button>
+            </form>
+
+
+
+            <?php
+                if(isset($_POST['subJob'])){
+                    include('../config.php');
+                    $id = rand(3,300);
+                    $name = mysqli_real_escape_string($conn,$_POST['name']);
+                    $contact = mysqli_real_escape_string($conn,$_POST['cont']);
+                    $infor = mysqli_real_escape_string($conn,$_POST['infor']);
+                    $education = mysqli_real_escape_string($conn,$_POST['edu']);
+                    $exp = mysqli_real_escape_string($conn,$_POST['tareaExp']);
+                    $skill = mysqli_real_escape_string($conn,$_POST['tareaSk']);
+                    $certificate = mysqli_real_escape_string($conn,$_POST['tareaCf']);
+                    while ($row = mysqli_fetch_assoc($result3)) {
+                        $id_com = $row['id'];
+                    }
+                    $sql = "INSERT INTO `cv`(`id`, `name`, `contact`, `infor`, `education`, `exp`, `skill`, `certificate`) 
+                    VALUES ('$id','$name','$contact','$infor','$education','$exp','$skill','$certificate')";
+                
+                    if (mysqli_query($conn, $sql)) {
+                        echo "Successfully";
+                    } else {
+                        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                    }
+
+        
+                
+                }
+            ?>
         </div>
     </div>
     
     <div class="footer">
         <p style="text-align: center; line-height: 200px; color: black;background-color: #E2DEF5;">Copyright @ Top Jobs 2022</p>
     </div>
-
+    
 </body>
-
-
 
 </html>

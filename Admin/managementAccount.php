@@ -47,7 +47,7 @@ else
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav ">
                         <li class="nav-item">
-                            <a class="nav-link" style="color: black;" href="javascript:window.location.href=window.location.href">Home</a>
+                            <a class="nav-link" style="color: black;" href="controlAdmin.php">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" style="color: black;" href="managementPost.php">ManagementPost</a>

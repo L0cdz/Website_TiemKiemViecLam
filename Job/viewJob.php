@@ -24,7 +24,7 @@ session_start();
 
 <body>
     <header>
-        <p id="text-head"><a href="../Client/controlClient.php">Top Jobs</a></p>
+        <p id="text-head">Top Jobs</p>
     </header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding: 0;">
             <div class="container-fluid" style="background-color: #E2DEF5;padding: 20px;">
@@ -65,10 +65,10 @@ session_start();
                                 echo "<p>Địa chỉ :".$row["address"]."</p>";            
                             echo"</div>";
                         echo"</div>";
-                        echo"<a  href=\"../Client/apply.php?id=$idjob\" style='width:50px;height:50px;background-color:#E2DEF5;' name='btnApp'>Apply</a>";
+                        echo"<a  href=\"../Client/apply.php?id=$idjob\" style='padding:15px;margin-top:20px;display:inline-block;border:1px solid #ccc;background-color:#ccc;' name='btnApp'>Apply</a>";
                         echo "<style>";
                         echo ".card-job:hover{
-                                background-color: #d9ffff;
+                                background-color: rgb(251, 246, 221);
                             }";
                         echo "</style>";
                     }

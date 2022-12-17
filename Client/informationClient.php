@@ -60,7 +60,7 @@ else
                             <a class="nav-link" style="color: black;" href="managementCV.php">ManagementCV</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: black;" href="loveJob.php">LoveJop</a>
+                            <a class="nav-link" style="color: black;" href="loveJob.php">LoveJob</a>
                         </li>
                         <li class="nav-item">
                             <?php
@@ -82,41 +82,46 @@ else
     <div style="background-color: white;padding-bottom:10px;height:1080px;">
         <div class="container">
             <h1>Employee's information</h1>
+            <form method="post">
+            <?php
+                while($row = mysqli_fetch_assoc($result)){    
+                    $up = $row['id'];  
+                ?> 
+                    
+                <div class="form-group">
+                    <label for="">Họ và Tên:</label>
+                    <input type="text" class="form-control" name="name" value="<?php echo $row['full_name']?>" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Số điện thoại:</label>
+                    <input type="text" class="form-control" name="phone" value="<?php echo $row['phone_number']?>" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Email:</label>
+                    <input type="text" class="form-control" name="email" value="<?php echo $row['email']?>" required>
+                </div>
+                <?php
+                    }
+                ?>         
+                    <button type="submit" class="btn btn-default" name="update" style="background-color: gray;">Update</button>
+            </form>
 
-            <table class="table table-striped" style="margin-top: 10px;" id="tbdata">
-
-                    <tr>
-                        <td>
-                            <label for="">Full name </label>
-                        </td>
-
-                        <td>
-                            <label for="">Phone </label>
-                        </td>
-
-                        <td>
-                            <label for="">Email </label>
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <?php
-                            while($row = mysqli_fetch_assoc($result)){
-                                
-                        ?> 
-                            <td><?php echo $row['full_name']?></td>
-                            <td><?php echo $row['phone_number']?></td>
-                            <td><?php echo $row['email']?></td>
-
-                    </tr>
-                    <?php
-                            }
-                    ?>         
-            </table>
-                <form action="UpdateInfo.php">
-                    <input type="submit" value="Update Information" style="background-color:azure;" />
-                </form>
-            </table>
+            
+        
+                <?php
+                    if(isset($_POST["update"])){
+                        include_once('../config.php');
+        
+                        $name = mysqli_real_escape_string($conn,$_POST['name']);
+                        $phone = mysqli_real_escape_string($conn,$_POST['phone']);
+                        $email = mysqli_real_escape_string($conn,$_POST['email']);
+    
+                        $sql = "UPDATE `client` SET `full_name`='$name',`email`='$email',`phone_number`='$phone' WHERE id='$up' ";
+                        $result = $conn->query($sql);
+                        $conn->close();
+                    }
+                ?>
+        
         </div>
     </div>
     

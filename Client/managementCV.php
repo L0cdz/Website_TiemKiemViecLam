@@ -60,7 +60,7 @@ else
                             <a class="nav-link" style="color: black;" href="managementCV.php">ManagementCV</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: black;" href="loveJob.php">LoveJop</a>
+                            <a class="nav-link" style="color: black;" href="loveJob.php">LoveJob</a>
                         </li>
                         <li class="nav-item">
                             <?php
@@ -82,7 +82,7 @@ else
     <div style="background-color: white;padding-bottom:10px;height:1080px;">
         <div class="container">
             <form method='post'style='align-self: center;margin-top:20px;'>
-                <input  style='width:100px;height:50px;' type='submit' value='Thêm' name='btnAdd'></input>
+            <a  href="addCV.php" style='border-radius:15px;text-decoration:none;border:1px solid #ccc;padding:15px;margin-top:20px;display:inline-block;border:1px solid #ccc;background-color:#ccc;'  value='View' name='btnView'>Thêm</a>
             </form>
             <?php
 
@@ -92,15 +92,17 @@ else
                     if($result->num_rows>0){
                         while($row = $result->fetch_assoc()){ 
                             $id = $row['id'];
-                            echo"<div class='card-job' style='border: 1px solid black;display: flex;padding:20px;margin-top:20px;flex-wrap:wrap;'>";
+                            echo"<div class='card-cv' style='border-radius:15px;border:1px solid #ccc;display: flex;padding:20px;margin-top:20px;flex-wrap:wrap;'>";
                                 echo"<div style='margin-right:auto;margin-left:20px'>";
                                     echo "<p style='font-size: 25px; color: red;'>".$row["name"]."</p>";
                                     //echo "<p>".$row["details"]."</p>";
                                 echo"</div>";
                                 echo"<form method='post'style='align-self: center;'>";
-                                    echo"<input  style='width:100px;height:50px;' type='submit' value='Sửa' name='btnEdit'></input>";
-                                    echo"<input  style='width:100px;height:50px;' type='submit' value='Xóa' name='btnDele'></input>";
-                                    echo"<a  href=\"viewCV.php?id=$id\" style='width:50px;height:50px;background-color:#E2DEF5;'  value='View' name='btnView'>View</a>";
+                                    echo"<a  href=\"viewCV.php?id=$id\" style='border-radius:15px;text-decoration:none;border:1px solid #ccc;padding:15px;margin-top:20px;display:inline-block;border:1px solid #ccc;background-color:#ccc;'   name='btnView'>Xem</a>";
+                                    echo "<br>";
+                                    echo"<a  href=\"viewCV.php?id=$id\" style='border-radius:15px;text-decoration:none;border:1px solid #ccc;padding:15px;margin-top:20px;display:inline-block;border:1px solid #ccc;background-color:#ccc;'  name='btnEdit'>Sửa</a>";
+                                echo "<br>";
+                                    echo"<a  href=\"deleteCV.php?id=$id\" style='border-radius:15px;text-decoration:none;border:1px solid #ccc;padding:15px;margin-top:20px;display:inline-block;border:1px solid #ccc;background-color:#ccc;'  name='btnDele'>Xóa</a>";
                                 echo"</form>";
                             echo"</div>";
                             echo "<style>";

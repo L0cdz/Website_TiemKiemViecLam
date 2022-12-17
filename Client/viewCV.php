@@ -20,94 +20,45 @@ session_start();
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
     </script>
+    <link rel="stylesheet" type="text/css" href="print.css" media="print">
     
 </head>
 
 <body>
-    <header>
-        <p id="text-head">Top Jobs - Employee</p>
-    </header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding: 0;">
-            <div class="container-fluid" style="background-color: #E2DEF5;padding: 20px;">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                    <ul class="navbar-nav ">
-                        <li class="nav-item">
-                            <a class="nav-link" style="color: black;"  href="controlClient.php">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" style="color: black;" href="informationClient.php">Information</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" style="color: black;" href="managementApply.php">ManagementApply</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" style="color: black;" href="managementCV.php">ManagementCV</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" style="color: black;" href="loveJob.php">LoveJop</a>
-                        </li>
-            
-                        <li class="nav-item">
-                            <a class="nav-link" 
-                            style="color: #FAF7F0; border: 2px solid red;border-radius: 30px;background-color:#CD104D;" 
-                            href="../logout.php">SIGN OUT</a>
-                        </li>
-                    </ul>
-                </div>
-        </div>
-    </nav>
-
     <div style="background-color: white;padding-bottom:10px;">
         <div class="container">
         <?php
-            function loadJob(){
-                    include('../config.php'); //db connection
-                    $id = $_GET['id'];
-                    $sql = "SELECT * FROM `cv` where id=$id";
-                    $result = $conn->query($sql);
 
-                    if($result->num_rows>0){
-                        while($row = $result->fetch_assoc()){
-                            echo"<div class='card-job' style='border: 1px solid black;display: flex;padding:20px;margin-top:20px;flex-wrap:wrap;'>";
-                                echo"<div style='margin-right:auto;margin-left:20px'>";
-                                    echo "<image src='https://p.kindpng.com/picc/s/78-785827_user-profile-avatar-login-account-male-user-icon.png'>";
-                                    echo "<p><p style='font-size:25px;font-style:bold;'>Họ và Tên:</p>".$row["infor"]."</p>";
-                                    echo "<p><p style='font-size:25px;font-style:bold;'>Học vấn:</p>".$row["education"]."</p>";
-                                    echo "<p><p style='font-size:25px;font-style:bold;'>Kinh nghiệm:</p>".$row["exp"]."</p>";
-                                    echo "<p><p style='font-size:25px;font-style:bold;'>Kỹ năng:</p>".$row["skill"]."</p>";
-                                    echo "<p><p style='font-size:25px;font-style:bold;'>Chứng chỉ:</p>".$row["certificate"]."</p>";
-                                    echo "<p><p style='font-size:25px;font-style:bold;'>Liên hệ:</p>".$row["contact"]."</p>";
+                include('../config.php'); //db connection
+                $id = $_GET['id'];
+                $sql = "SELECT * FROM `cv` where id=$id";
+                $result = $conn->query($sql);
 
-                                echo"</div>";
-                                echo"<form method='post'style='align-self: center;'>";
-                                    echo"<input  style='width:100px;height:50px;' type='submit' value='Sửa' name='btnEdit'></input>";
-                                    echo"<input  style='width:100px;height:50px;' type='submit' value='Xóa' name='btnDele'></input>";
-                                echo"</form>";
-                            echo"</div>";
-                            echo "<style>";
-                            echo ".card-job:hover{
-                                    background-color: #d9ffff;
-                                }";
-                            echo "</style>";
-                        }
-                    }else{
-                        echo "None result";
+                if($result->num_rows>0){
+                    while($row = $result->fetch_assoc()){
+                        echo"<div class='card-job' style='border-radius:15px;border:1px solid #ccc;padding:15px;margin-top:20px;display:inline-block;border:1px solid #ccc;background-color:#ccc;width:100%;'>";
+                            echo"<div style='margin-right:auto;margin-left:20px'>";
+                                echo "<image src='https://p.kindpng.com/picc/s/78-785827_user-profile-avatar-login-account-male-user-icon.png'>";
+                                echo "<p><p style='font-size:25px;font-style:bold;'>Họ và Tên:</p>".$row["infor"]."</p>";
+                                echo "<p><p style='font-size:25px;font-style:bold;'>Học vấn:</p>".$row["education"]."</p>";
+                                echo "<p><p style='font-size:25px;font-style:bold;'>Kinh nghiệm:</p>".$row["exp"]."</p>";
+                                echo "<p><p style='font-size:25px;font-style:bold;'>Kỹ năng:</p>".$row["skill"]."</p>";
+                                echo "<p><p style='font-size:25px;font-style:bold;'>Chứng chỉ:</p>".$row["certificate"]."</p>";
+                                echo "<p><p style='font-size:25px;font-style:bold;'>Liên hệ:</p>".$row["contact"]."</p>";
                     }
-                    $conn->close();
+                }else{
+                    echo "None result";
                 }
-                loadJob();
+                $conn->close();
+            
+
             ?> 
         </div>
+        <div class="text-center">
+            <button onclick="window.print();" class="btn btn-primary" id="print-btn">Print</button>
+        </div>
+
     </div>
-    
-    <div class="footer">
-        <p style="text-align: center; line-height: 200px; color: black;background-color: #E2DEF5;">Copyright @ Top Jobs 2022</p>
-    </div>
-    
 </body>
 
 </html>

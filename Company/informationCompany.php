@@ -8,6 +8,7 @@ if(isset($_SESSION['username']))
     from `company` join `login` on company.log_id=login.log_id WHERE username = '$username'";
     $result = mysqli_query($conn, $query);
     $result2 = mysqli_query($conn, $query);
+
 }
 else
 {
@@ -79,51 +80,48 @@ else
     </nav>
 
     <div style="background-color: white;padding-bottom:10px;height:1080px;">
-        <div class="container">
+        <<div class="container">
             <h1>Company's information</h1>
-
-            <table class="table table-striped" style="margin-top: 10px;" id="tbdata">
-
-                    <tr>
-                        <td>
-                            <label for="">Company name </label>
-                        </td>
-
-                        <td>
-                            <label for="">Phone </label>
-                        </td>
-
-                        <td>
-                            <label for="">Email </label>
-                        </td>
-
-                        <td>
-                            <label for="">ICON </label>
-                        </td>      
-                    </tr>
-                    <tr>
-                        <?php
-                            while($row = mysqli_fetch_assoc($result)){
-                                
-                        ?> 
-                            <td><?php echo $row['company_name']?></td>
-                            <td><?php echo $row['phone_number']?></td>
-                            <td><?php echo $row['company_email']?></td>                   
-                            <td><?php echo "<img src='" .  $row['icon'] . "' alt='img' width = '30' height = '30'>";?></td>
-
-
-                    </tr>
-                    <?php
-                            }
-                    ?>
+            <form method="post">
+            <?php
+                while($row = mysqli_fetch_assoc($result)){    
+                    $up = $row['id'];  
+                ?> 
                     
+                <div class="form-group">
+                    <label for="">Tên Công Ty:</label>
+                    <input type="text" class="form-control" name="name" value="<?php echo $row['company_name']?>" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Số điện thoại:</label>
+                    <input type="text" class="form-control" name="phone" value="<?php echo $row['phone_number']?>" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Email:</label>
+                    <input type="text" class="form-control" name="email" value="<?php echo $row['company_email']?>" required>
+                </div>
+                <?php
+                    }
+                ?>         
+                    <button type="submit" class="btn btn-default" name="update" style="background-color: gray;">Update</button>
+            </form>
 
-                    
-            </table>
-                <form action="UpdateInfo.php">
-                    <input type="submit" value="Update Information" style="background-color:azure;" />
-                </form>
-            </table>
+            
+        
+                <?php
+                    if(isset($_POST["update"])){
+                        include_once('../config.php');
+        
+                        $name = mysqli_real_escape_string($conn,$_POST['name']);
+                        $phone = mysqli_real_escape_string($conn,$_POST['phone']);
+                        $email = mysqli_real_escape_string($conn,$_POST['email']);
+    
+                        $sql = "UPDATE `company` SET `company_name`='$name',`phone_number`='$phone',`company_email`='$email' WHERE id='$up' ";
+                        $result = $conn->query($sql);
+                        $conn->close();
+                    }
+                ?>
+        
         </div>
     </div>
     
