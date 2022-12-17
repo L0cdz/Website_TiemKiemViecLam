@@ -65,6 +65,7 @@ session_start();
                                 echo "<p>Địa chỉ :".$row["address"]."</p>";            
                             echo"</div>";
                         echo"</div>";
+                        echo"<a  href=\"../Client/apply.php?id=$idjob\" style='width:50px;height:50px;background-color:#E2DEF5;' name='btnApp'>Apply</a>";
                         echo "<style>";
                         echo ".card-job:hover{
                                 background-color: #d9ffff;
