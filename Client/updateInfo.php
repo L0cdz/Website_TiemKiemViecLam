@@ -136,8 +136,8 @@ else
                                     $res2 = mysqli_fetch_array($table3);
                                     $lid = $res2['log_id'];
                                     $q3 = "INSERT into `client` 
-                                    (`log_id`,`full_name`,`phone_number`,`email`) 
-                                    VALUES ('$lid','$name','$phone','$email','$icon')";
+                                    (`log_id`,`full_name`,`phone_number`,`email`,`cv_id`) 
+                                    VALUES ('$lid','$name','$phone','$email','1')";
                                     
                                 }
                                 
