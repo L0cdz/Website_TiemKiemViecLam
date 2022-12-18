@@ -4,13 +4,14 @@ session_start();
 $username = $_SESSION['username'];
 if(isset($_SESSION['username']))
 {
-    $query = "SELECT company_name, description,post_date
+    $query = "SELECT *
                 FROM `company` JOIN `post` ON company.id = post.company_id
-                JOIN `job` ON job.job_id = post.job_id";
+                JOIN `job` ON job.job_id = post.job_id WHERE post.status = 'pending'";
     $result = mysqli_query($conn, $query);
     $result2 = mysqli_query($conn, $query);
 
 }
+    
 else
 {
     header('location:../login.php');
@@ -66,6 +67,7 @@ else
                         </li>
                     </ul>
                 </div>
+                
         </div>
     </nav>
 
@@ -74,6 +76,7 @@ else
             <h1>Danh sách Bài Tuyển Dụng</h1>
             <table class="table table-striped" style="margin-top: 10px;" id="tbdata">
                 <thead>
+
                     <tr>
                         <th>Tên Công Ty</th>
                         <th>Mô Tả Công Việc</th>
@@ -83,12 +86,21 @@ else
                     <tr>
                     <!-- #fetch table post -->
                     <?php
-                        while($row = mysqli_fetch_assoc($result2)){     
+                        
+                        while($row = mysqli_fetch_assoc($result2)){  
+                            $pid = $row['post_id'];
                             ?> 
+                            
                                 <td><?php echo $row['company_name']; ?></td>
                                 <td><?php echo $row['description']; ?></td>
                                 <td><?php echo $row['post_date']; ?></td>
-                                <td><?php echo "thao tac"; ?></td>
+                                <td><?php
+                                    echo"<form method='POST'style='align-self: center;'>";
+                                    echo"<a  href=\"approvePost.php?pid=$pid\" style='border-radius:10px;text-decoration:none;padding:13px 20px;margin-top:20px;display:inline-block;border:1px solid #ccc;background-color:#ccc;' value='View' name='approve'>Approve</a>";
+                                    echo "<br>";
+                                    echo"<a  href=\"declinePost.php?pid=$pid\" style='border-radius:10px;text-decoration:none;padding:13px 20px;margin-top:20px;display:inline-block;border:1px solid #ccc;background-color:#ccc;' value='View' name='decline'>Decline</a>";
+                                    echo"</form>";
+                                ?></td>
                             
                             </tr>
                             <?php
@@ -99,11 +111,15 @@ else
             </table>
         </div>
     </div>
+
+    <?php
+        
+    ?>
     
     <div class="footer">
         <p style="text-align: center; line-height: 200px; color: black;background-color: #E2DEF5;">Copyright @ Top Jobs 2022</p>
     </div>
     
 </body>
-
+   
 </html>

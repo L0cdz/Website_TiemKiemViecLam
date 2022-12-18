@@ -37,6 +37,7 @@ else
 </head>
 
 <body>
+    
     <header>
         <p id="text-head">Top Jobs - Admin</p>
     </header>
@@ -71,13 +72,11 @@ else
     <div style="background-color: white;padding-bottom:10px;height:1080px;">
         <div class="container">
             <h1>Danh sách account</h1>
-            <span class="btn btn-primary">Thêm account</span>
             <table class="table table-striped" style="margin-top: 10px;" id="tbdata">
                 <thead>
                     <tr>
                         <th>Username</th>
                         <th>Type</th>
-                        <th>Thao tác</th>
                     </tr>
                     <tr>
                     <!-- #fetch table post -->
@@ -86,8 +85,6 @@ else
                             ?> 
                                 <td><?php echo $row['username']; ?></td>
                                 <td><?php echo $row['account_type']; ?></td>
-                                <td><?php echo "thao tac"; ?></td>
-                            
                             </tr>
                             <?php
                         }
