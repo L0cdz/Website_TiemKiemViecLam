@@ -34,6 +34,18 @@ session_start();
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav ">
+                    <li class="nav-item">
+                            <a class="nav-link" style="color: black;" href="controlClient.php">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: black;" href="informationClient.php">Information</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: black;" href="postJob.php">Post</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: black;" href="managementApply.php">ManagementApply</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" 
                             style="color: #FAF7F0; border-radius:1px solid #393E46;background-color:#CD104D;" 

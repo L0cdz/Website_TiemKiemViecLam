@@ -5,7 +5,7 @@ $username = $_SESSION['username'];
 if(isset($_SESSION['username']))
 {
     $query = "select *
-    from `company` join `login` on company.log_id=login.log_id WHERE username = '$username'";
+    from `client` join `login` on client.log_id=login.log_id WHERE username = '$username'";
     $result = mysqli_query($conn, $query);
     $result2 = mysqli_query($conn, $query);
 }
@@ -37,7 +37,7 @@ else
 
 <body>
     <header>
-        <p id="text-head">Top Jobs - Company</p>
+        <p id="text-head">Top Jobs - Client</p>
     </header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding: 0;">
             <div class="container-fluid" style="background-color: #E2DEF5;padding: 20px;">
@@ -48,10 +48,10 @@ else
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav ">
                         <li class="nav-item">
-                            <a class="nav-link" style="color: black;" href="controlCompany.php">Home</a>
+                            <a class="nav-link" style="color: black;" href="controlClient.php">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: black;" href="informationCompany.php">Information</a>
+                            <a class="nav-link" style="color: black;" href="informationClient.php">Information</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" style="color: black;" href="postJob.php">Post</a>
@@ -73,12 +73,11 @@ else
 
     <div style="background-color: white;padding-bottom:10px;height:1080px;">
         <div class="container">
-            <h1>Update Company's information</h1>
+            <h1>Update Employee's information</h1>
             <form method="POST">
-                Company's name: <input type="text" name="name" required><br><br>
+                Full name: <input type="text" name="name" required><br><br>
                 Phone number: <input type="text" name="phone" required><br><br>
                 E-mail: <input type="text" name="email" required><br><br>
-                Icon's Link: <input type="text" name="icon" required><br><br>
                 Please enter password to confirm: <input type="password" name="pwd" required><br><br>
 
                 <button type="submit" style="background-color:azure" name="confirm">Confirm</button>
@@ -89,9 +88,9 @@ else
                     $name = $_POST['name'];
                     $phone = $_POST['phone'];
                     $email = $_POST['email'];
-                    $icon = $_POST['icon'];
+                    
                     #validate email
-                    $query = "Select * from `company` where company_email='$email'";
+                    $query = "Select * from `client` where email='$email'";
                     $result = mysqli_query($conn,$query); 
                     $num = mysqli_num_rows($result);
                     if($num > 0){
@@ -116,16 +115,16 @@ else
                                 $error = "wrong password!";
                             else{
                     
-                                $q2 = "SELECT * FROM `company` JOIN `login`
-                                        ON company.log_id = `login`.log_id
+                                $q2 = "SELECT * FROM `client` JOIN `login`
+                                        ON client.log_id = `login`.log_id
                                         WHERE login.username = '$username'";
                                 $table2 = mysqli_query($conn,$q2);
                                 #infor exist -> update, else -> insert
                                 if(mysqli_num_rows($table2) > 0){
                                     $res1 = mysqli_fetch_array($table2);
-                                    $q3 = "UPDATE `company`
-                                    SET company_name = '$name', phone_number = '$phone',
-                                    company_email = '$email', icon = '$icon'
+                                    $q3 = "UPDATE `client`
+                                    SET full_name = '$name', phone_number = '$phone',
+                                    email = '$email'
                                     WHERE log_id = '".$res1['log_id']."'";
                                     
                                 } 
@@ -136,8 +135,8 @@ else
                                     $table3 = mysqli_query($conn,$q4);
                                     $res2 = mysqli_fetch_array($table3);
                                     $lid = $res2['log_id'];
-                                    $q3 = "INSERT into `company` 
-                                    (`log_id`,`company_name`,`phone_number`,`company_email`,`icon`) 
+                                    $q3 = "INSERT into `client` 
+                                    (`log_id`,`full_name`,`phone_number`,`email`) 
                                     VALUES ('$lid','$name','$phone','$email','$icon')";
                                     
                                 }
@@ -154,13 +153,13 @@ else
                     if(!$error){
                         echo "<div class='form'>
                         <h3 style='text-align: center;'>Update successfully.</h3><br/>
-                        <p class='link'>Click <a href='informationCompany.php'>here</a> to view your informations</p>
+                        <p class='link'>Click <a href='informationClient.php'>here</a> to view your informations</p>
                         </div>";
                     }
                     else{
                         echo "<div class='form'>
                         <h3 style='text-align: center;'>Something went wrong!.</h3><br/>
-                        <strong>!</strong> '$error'
+                        <strong>!</strong> '$error
                         </div>";
                     }
 

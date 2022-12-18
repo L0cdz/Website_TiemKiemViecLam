@@ -9,6 +9,7 @@ if(isset($_SESSION['username']))
     $result = mysqli_query($conn, $query);
     $result2 = mysqli_query($conn, $query);
     $result3 = mysqli_query($conn, $query);
+    $date  = date("Y-m-d");
 }
 else
 {
@@ -113,7 +114,8 @@ else
 
             <?php
                 if(isset($_POST['subJob'])){
-                    include('../config.php'); 
+                    include('../config.php');
+                    #get all in4 of job details
                     $job_name = mysqli_real_escape_string($conn,$_POST['job_name']);
                     $role = mysqli_real_escape_string($conn,$_POST['role']);
                     $address = mysqli_real_escape_string($conn,$_POST['addr']);
@@ -121,15 +123,29 @@ else
                     $descrip = mysqli_real_escape_string($conn,$_POST['tareaDes']);
                     $skill = mysqli_real_escape_string($conn,$_POST['tareaSk']);
                     while ($row = mysqli_fetch_assoc($result3)) {
+                        #get company information;
                         $id_com = $row['id'];
+                        $c_name = $row['company_name'];
+                        
                     }
                     $sql = "INSERT INTO `job`(`company_id`, `salary`, `description`, `role`, `job_name`, `skills_required`, `address`) 
                     VALUES ('$id_com ','$salary','$descrip','$role',' $job_name',' $skill','$address')";
-                
-                    if (mysqli_query($conn, $sql)) {
-                        echo "Successfully";
+                    
+
+                    #get jobid
+                    $qjid = "SELECT job_id FROM `job` WHERE job.company_id = '$id_com'";
+                    $tjid = mysqli_query($conn, $qjid);
+                    $rjid = mysqli_fetch_assoc($tjid);
+                    $jid = $rjid['job_id'];
+                  
+                    #insert record to POST table.
+                    $sql2 = "INSERT INTO `post`(`post_date`, `company_id`, `job_id`, `status`) 
+                    VALUES ('$date','$id_com','$jid','Pending')";
+                    
+                    if (mysqli_query($conn, $sql) && mysqli_query($conn, $sql2)) {
+                        echo "Success";
                     } else {
-                        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                        echo "Error: " . $sql,$sql2 . "<br>" . mysqli_error($conn);
                     }
 
         

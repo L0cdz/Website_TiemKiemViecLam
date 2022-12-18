@@ -4,15 +4,16 @@ session_start();
 $username = $_SESSION['username'];
 if(isset($_SESSION['username']))
 {
-    $query = "select *
-    from `client` join `login` on client.log_id=login.log_id WHERE username = '$username'";
+
+    $query = "SELECT *
+    FROM `apply` JOIN `job` ON apply.job_id = job.job_id
+    JOIN `client` ON client.id = apply.client_id
+    JOIN `login` ON login.log_id = client.log_id
+    WHERE login.username = '$username'";
+    
     $result = mysqli_query($conn, $query);
-    $result2 = mysqli_query($conn, $query);
 }
-else
-{
-    header('location:../login.php');
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +38,7 @@ else
 
 <body>
     <header>
-        <p id="text-head">Top Jobs - Employee</p>
+        <p id="text-head">Top Jobs - Client</p>
     </header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding: 0;">
             <div class="container-fluid" style="background-color: #E2DEF5;padding: 20px;">
@@ -48,30 +49,21 @@ else
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav ">
                         <li class="nav-item">
-                            <a class="nav-link" style="color: black;"  href="controlClient.php">Home</a>
+                            <a class="nav-link" style="color: black;" href="controlClient.php">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" style="color: black;" href="informationClient.php">Information</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" style="color: black;" href="postJob.php">Post</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" style="color: black;" href="managementApply.php">ManagementApply</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" style="color: black;" href="managementCV.php">ManagementCV</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" style="color: black;" href="loveJob.php">LoveJob</a>
-                        </li>
-                        <li class="nav-item">
-                            <?php
-                            while ($row = mysqli_fetch_assoc($result2)) {
-                                echo "<p class='nav-link' style='color: black;'>Xin chào:".$row['full_name']."</p>";
-                            }
-                            ?>
-                        </li>
+                
                         <li class="nav-item">
                             <a class="nav-link" 
-                            style="color: #FAF7F0; border: 2px solid red;border-radius: 30px;background-color:#CD104D;" 
+                            style="color: #FAF7F0; border: 2px solid red;border-radius: 30px;background-color:#CD104D;"
                             href="../logout.php">SIGN OUT</a>
                         </li>
                     </ul>
@@ -80,15 +72,41 @@ else
     </nav>
 
     <div style="background-color: white;padding-bottom:10px;height:1080px;">
-        <div class="container">
-            <h1>Chưa biết</h1>
+        <<div class="container">
+            <h1>Apply Management</h1>
+            <table class="table table-bordered text-center">
+            <tr>
+                <td>Job name</td>
+                <td>Apply date</td>
+        
+            </tr>
 
+            <tr>
+                
+                    
+            <?php
+            if (!$result){
+                echo "<br><h2>You havent applied any job yet</h2>";
+            }
+            else{
+                while($row = mysqli_fetch_assoc($result)){     
+                    ?> 
+                        <td><?php echo $row['job_name']; ?></td>
+                        <td><?php echo $row['apply_date']; ?></td>
+                       
+                    </tr>
+                    <?php
+                }
+            }
+                ?>      
+                </table>
         </div>
     </div>
     
     <div class="footer">
         <p style="text-align: center; line-height: 200px; color: black;background-color: #E2DEF5;">Copyright @ Top Jobs 2022</p>
     </div>
+    
     
 </body>
 

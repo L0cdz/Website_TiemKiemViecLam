@@ -4,15 +4,16 @@ session_start();
 $username = $_SESSION['username'];
 if(isset($_SESSION['username']))
 {
-    $query = "select *
-    from `company` join `login` on company.log_id=login.log_id WHERE username = '$username'";
+
+    $query = "SELECT *
+    FROM `post` JOIN `job` ON post.job_id = job.job_id
+    JOIN `company` ON company.id = post.company_id
+    JOIN `login` ON login.log_id = company.log_id
+    WHERE login.username = '$username'";
+    
     $result = mysqli_query($conn, $query);
-    $result2 = mysqli_query($conn, $query);
 }
-else
-{
-    header('location:../login.php');
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,13 +60,7 @@ else
                         <li class="nav-item">
                             <a class="nav-link" style="color: black;" href="managementApply.php">ManagementApply</a>
                         </li>
-                        <li class="nav-item">
-                            <?php
-                            while ($row = mysqli_fetch_assoc($result2)) {
-                                echo "<p class='nav-link' style='color: black;'>Xin chào:".$row['company_name']."</p>";
-                            }
-                            ?>
-                        </li>
+                
                         <li class="nav-item">
                             <a class="nav-link" 
                             style="color: #FAF7F0; border: 2px solid red;border-radius: 30px;background-color:#CD104D;"
@@ -77,13 +72,42 @@ else
     </nav>
 
     <div style="background-color: white;padding-bottom:10px;height:1080px;">
-        <div class="container">
-            <h1>Chưa biết</h1>
+        <<div class="container">
+            <h1>Post Management</h1>
+            <table class="table table-bordered text-center">
+            <tr>
+                <td>Job name</td>
+                <td>Post date</td>
+                
+                <td>Status</td>
+            </tr>
+
+            <tr>
+                
+                    
+            <?php
+            if (!$result){
+                echo "<br><h2>You havent post any job yet</h2>";
+            }
+            else{
+                while($row = mysqli_fetch_assoc($result)){     
+                    ?> 
+                        <td><?php echo $row['job_name']; ?></td>
+                        <td><?php echo $row['post_date']; ?></td>
+                        <td><?php echo $row['status']; ?></td>
+                    </tr>
+                    <?php
+                    }
+            }
+                ?>      
+                </table>
+        </div>
     </div>
     
     <div class="footer">
         <p style="text-align: center; line-height: 200px; color: black;background-color: #E2DEF5;">Copyright @ Top Jobs 2022</p>
     </div>
+    
     
 </body>
 

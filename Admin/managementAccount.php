@@ -4,8 +4,10 @@ session_start();
 $username = $_SESSION['username'];
 if(isset($_SESSION['username']))
 {
-    $query = "select *
-    from `admin` join `login` on admin.log_id=login.log_id WHERE username = '$username'";
+   
+    $query = "SELECT *
+                FROM `login`";
+                
     $result = mysqli_query($conn, $query);
 }
 else
@@ -55,13 +57,7 @@ else
                         <li class="nav-item">
                             <a class="nav-link" style="color: black;" href="managementAccount.php">ManagementAccount</a>
                         </li>
-                        <li class="nav-item">
-                            <?php
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                echo "<p class='nav-link' style='color: black;'>Xin chào:".$row['name']."</p>";
-                            }
-                            ?>
-                        </li>
+                      
                         <li class="nav-item">
                             <a class="nav-link" 
                             style="color: #FAF7F0; border: 2px solid red;border-radius: 30px;background-color:#CD104D;"
@@ -80,44 +76,25 @@ else
                 <thead>
                     <tr>
                         <th>Username</th>
-                        <th>Password</th>
                         <th>Type</th>
                         <th>Thao tác</th>
                     </tr>
+                    <tr>
+                    <!-- #fetch table post -->
+                    <?php
+                        while($row = mysqli_fetch_assoc($result)){     
+                            ?> 
+                                <td><?php echo $row['username']; ?></td>
+                                <td><?php echo $row['account_type']; ?></td>
+                                <td><?php echo "thao tac"; ?></td>
+                            
+                            </tr>
+                            <?php
+                        }
+                    ?>
                 </thead>
                 <tbody></tbody>
-            </table>
-            <?php
-                include('../config.php'); //db connection
-                $sql = "SELECT * FROM `login`";
-                $result = $conn->query($sql);
-                if($result->num_rows>0){
-                    while($row = $result->fetch_assoc()){
-                        $password_hash = $row['password'];
-                        echo "<tr>";
-                            echo "<th>";
-                            echo $row['username'];
-                            echo "</th>";
-                            echo $password_hash;
-                            echo "</th>";
-                            echo "<th>";
-                            echo $row["account_type"];
-                            echo "</th>";
-                            echo "<th><button name='btnapply'>Xóa</button></th>";
-                            echo "<th><button name='btnlove'>Sửa</button></th>";
-                            echo "<hr>";
-                        echo "</tr>";
-                        if (isset($_POST['btnapply'])) {
-                            echo ' <div class="alert alert-danger 
-                            alert-dismissible fade show" role="alert"> 
-                        <strong>Error!</strong> ';
-                        }
-                    }
-                }else{
-                    echo "None result";
-                }
-                $conn->close();
-            ?>  
+            </table> 
         </div>
     </div>
     

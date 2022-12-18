@@ -14,6 +14,8 @@ else
     header('location:../login.php');
 }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,12 +34,12 @@ else
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
     </script>
-    
+     
 </head>
 
 <body>
     <header>
-        <p id="text-head">Top Jobs - Employee</p>
+        <p id="text-head">Top Jobs - Client</p>
     </header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding: 0;">
             <div class="container-fluid" style="background-color: #E2DEF5;padding: 20px;">
@@ -48,20 +50,12 @@ else
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav ">
                         <li class="nav-item">
-                            <a class="nav-link" style="color: black;"  href="controlClient.php">Home</a>
+                            <a class="nav-link" style="color: black;" href="controlClient.php">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" style="color: black;" href="informationClient.php">Information</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" style="color: black;" href="managementApply.php">ManagementApply</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" style="color: black;" href="managementCV.php">ManagementCV</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" style="color: black;" href="loveJob.php">LoveJob</a>
-                        </li>
+                     
                         <li class="nav-item">
                             <?php
                             while ($row = mysqli_fetch_assoc($result2)) {
@@ -71,7 +65,7 @@ else
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" 
-                            style="color: #FAF7F0; border: 2px solid red;border-radius: 30px;background-color:#CD104D;" 
+                            style="color: #FAF7F0; border: 2px solid red;border-radius: 30px;background-color:#CD104D;"
                             href="../logout.php">SIGN OUT</a>
                         </li>
                     </ul>
@@ -80,48 +74,35 @@ else
     </nav>
 
     <div style="background-color: white;padding-bottom:10px;height:1080px;">
-        <div class="container">
-            <h1>Employee's information</h1>
-            <form method="post">
-            <?php
-                while($row = mysqli_fetch_assoc($result)){    
-                    $up = $row['id'];  
-                ?> 
-                    
-                <div class="form-group">
-                    <label for="">Họ và Tên:</label>
-                    <input type="text" class="form-control" name="name" value="<?php echo $row['full_name']?>" required>
-                </div>
-                <div class="form-group">
-                    <label for="">Số điện thoại:</label>
-                    <input type="text" class="form-control" name="phone" value="<?php echo $row['phone_number']?>" required>
-                </div>
-                <div class="form-group">
-                    <label for="">Email:</label>
-                    <input type="text" class="form-control" name="email" value="<?php echo $row['email']?>" required>
-                </div>
-                <?php
-                    }
-                ?>         
-                    <button type="submit" class="btn btn-default" name="update" style="background-color: gray;">Update</button>
-            </form>
+        <<div class="container">
+            <h1>Client's information</h1>
+            <table class="table table-bordered text-center">
+            <tr>
+                <td>Full Name</td>
+                <td>Email</td>
+                <td>Phone number</td>
+                
+            </tr>
 
-            
-        
+            <tr>
+            <?php
+                while($row = mysqli_fetch_assoc($result)){     
+                ?> 
+                    <td><?php echo $row['full_name']; ?></td>
+                    <td><?php echo $row['email']; ?></td>
+                    <td><?php echo $row['phone_number']; ?></td>
+                    
+                </tr>
+                
                 <?php
-                    if(isset($_POST["update"])){
-                        include_once('../config.php');
-        
-                        $name = mysqli_real_escape_string($conn,$_POST['name']);
-                        $phone = mysqli_real_escape_string($conn,$_POST['phone']);
-                        $email = mysqli_real_escape_string($conn,$_POST['email']);
-    
-                        $sql = "UPDATE `client` SET `full_name`='$name',`email`='$email',`phone_number`='$phone' WHERE id='$up' ";
-                        $result = $conn->query($sql);
-                        $conn->close();
                     }
-                ?>
-        
+                ?>      
+                </table>
+                <br>
+                    <form action="updateInfo.php">
+                        <button type="submit" class="btn btn-default" name="update" style="background-color: gray;">Update</button>
+                    </form>
+                
         </div>
     </div>
     

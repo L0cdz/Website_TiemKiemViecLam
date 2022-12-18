@@ -4,9 +4,12 @@ session_start();
 $username = $_SESSION['username'];
 if(isset($_SESSION['username']))
 {
-    $query = "select *
-    from `admin` join `login` on admin.log_id=login.log_id WHERE username = '$username'";
+    $query = "SELECT company_name, description,post_date
+                FROM `company` JOIN `post` ON company.id = post.company_id
+                JOIN `job` ON job.job_id = post.job_id";
     $result = mysqli_query($conn, $query);
+    $result2 = mysqli_query($conn, $query);
+
 }
 else
 {
@@ -55,13 +58,7 @@ else
                         <li class="nav-item">
                             <a class="nav-link" style="color: black;" href="managementAccount.php">ManagementAccount</a>
                         </li>
-                        <li class="nav-item">
-                            <?php
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                echo "<p class='nav-link' style='color: black;'>Xin chào:".$row['name']."</p>";
-                            }
-                            ?>
-                        </li>
+                        
                         <li class="nav-item">
                             <a class="nav-link" 
                             style="color: #FAF7F0; border: 2px solid red;border-radius: 30px;background-color:#CD104D;"
@@ -83,6 +80,20 @@ else
                         <th>Ngày Đăng</th>
                         <th>Thao tác</th>
                     </tr>
+                    <tr>
+                    <!-- #fetch table post -->
+                    <?php
+                        while($row = mysqli_fetch_assoc($result2)){     
+                            ?> 
+                                <td><?php echo $row['company_name']; ?></td>
+                                <td><?php echo $row['description']; ?></td>
+                                <td><?php echo $row['post_date']; ?></td>
+                                <td><?php echo "thao tac"; ?></td>
+                            
+                            </tr>
+                            <?php
+                        }
+                    ?>
                 </thead>
                 <tbody></tbody>
             </table>

@@ -13,9 +13,8 @@ if(isset($_SESSION['username'])){
 }
 
 $eid = $res['id'];
-$date = date("Y-m-d");
 
-$q1=mysqli_query($conn,"SELECT * FROM `apply` WHERE apply.client_id =$eid"); 
+$q1=mysqli_query($conn,"SELECT * FROM `apply` WHERE apply.client_id ='$eid' AND apply.job_id = '$jid'"); 
 if(mysqli_num_rows($q1)>0){
     echo " <div class='alert alert-danger alert-dismissible' role='alert'>
         <p style='font-size: 30px;margin-left:600px;'><strong>Note:</strong> You have already applied this job!</p>
@@ -25,7 +24,7 @@ else{
     $q2=mysqli_query($conn,"SELECT * FROM `job` WHERE job_id =$jid ");
     $q2re=mysqli_fetch_array($q2);
     
-    $q3=mysqli_query($conn,"INSERT INTO `apply` (client_id,job_id,apply_date) VALUES ($eid,$jid,$date)");
+    $q3=mysqli_query($conn,"INSERT INTO `apply` (client_id,job_id,apply_date) VALUES ($eid,$jid,now())");
    // echo mysqli_error($db1);
     if($q2){
         $q4=mysqli_query($conn,"SELECT * from client join `apply` on client.id=apply.client_id where client.id=$eid");

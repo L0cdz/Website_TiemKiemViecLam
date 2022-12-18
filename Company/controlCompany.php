@@ -175,7 +175,7 @@ else
                                         echo "<p>Ngày đăng:".$row["datePost"]."</p>";
                                     echo"</div>";
                                     echo"<form method='POST'style='align-self: center;'>";
-                                        echo"<a  href=\"../Job/viewJob.php?idjob=$id\" style='border-radius:10px;text-decoration:none;padding:15px 25px;margin-top:20px;display:inline-block;border:1px solid #ccc;background-color:#ccc;'  value='View' name='btnView'>Xem</a>";
+                                        echo"<a  href=\"viewJob.php?idjob=$id\" style='border-radius:10px;text-decoration:none;padding:15px 25px;margin-top:20px;display:inline-block;border:1px solid #ccc;background-color:#ccc;'  value='View' name='btnView'>Xem</a>";
 
                                     echo"</form>";
                                 echo"</div>";
